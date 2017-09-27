@@ -4,14 +4,13 @@ Kotlin project template following an MVVM approach.
 The project comes with a basic **Dagger2** and **Architecture Components** implementation.
 
 ## External libraries used
-* Dagger2;
-* RxJava2;
-* RxKotlin;
-* RxAndroid;
-* Retrofit;
-* OkHttp;
-* Moshi;
-* Timberkt.
+* Dagger2: https://github.com/google/dagger
+* RxJava2: https://github.com/ReactiveX/RxJava
+* RxKotlin: https://github.com/ReactiveX/RxKotlin
+* RxAndroid: https://github.com/ReactiveX/RxAndroid
+* Retrofit (with OkHttp for logging): https://github.com/square/retrofit
+* Moshi: https://github.com/square/moshi
+* Timberkt: https://github.com/ajalt/timberkt
 
 ## The project has the following packages:
 
