@@ -1,4 +1,4 @@
-package com.rcosteira.kotlintemplate.ui
+package com.rcosteira.kotlintemplate.ui.main
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleRegistry
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var androidInjector: DispatchingAndroidInjector<Fragment>
 
     @Inject
-    lateinit var navigationController: NavigationController
+    lateinit var mainNavigationController: MainNavigationController
 
     private val lifecycleRegistry: LifecycleRegistry = LifecycleRegistry(this)
 
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            navigationController.navigateToMenu()
+            mainNavigationController.navigateToMenu()
         }
     }
 

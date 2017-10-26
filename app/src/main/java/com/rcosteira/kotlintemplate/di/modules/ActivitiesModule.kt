@@ -1,6 +1,6 @@
 package com.rcosteira.kotlintemplate.di.modules
 
-import com.rcosteira.kotlintemplate.ui.MainActivity
+import com.rcosteira.kotlintemplate.ui.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

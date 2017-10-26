@@ -1,4 +1,4 @@
-package com.rcosteira.kotlintemplate.ui.menu
+package com.rcosteira.kotlintemplate.ui.main.menu
 
 import com.rcosteira.kotlintemplate.data.DataManager
 import com.rcosteira.kotlintemplate.ui.base.BaseViewModel

@@ -1,4 +1,4 @@
-package com.rcosteira.kotlintemplate.ui.menu
+package com.rcosteira.kotlintemplate.ui.main.menu
 
 
 import android.arch.lifecycle.ViewModelProvider

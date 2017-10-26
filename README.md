@@ -15,9 +15,9 @@ The project comes with a basic **Dagger2** and **Architecture Components** imple
 ## The project has the following packages:
 
 1. data: It contains all the data access and manipulation components, which are then aggregated in a single data manager class (a.k.a. repository);
-2. di: Components, modules and helper classes/interfaces for dependency injection
-3. ui: View classes (fragments) along with their corresponding view models;
-4. utils: Utility classes (AppConstants, etc);
+2. di: Components, modules and helper classes/interfaces for dependency injection;
+3. ui: View classes (activities and fragments) along with their corresponding view models;
+4. utils: Utility classes.
 
 
 
