@@ -14,11 +14,16 @@ The project comes with a basic **Dagger2** and **Architecture Components** imple
 
 ## The project has the following packages:
 
-1. data: It contains all the data access and manipulation components, which are then aggregated in a single data manager class (a.k.a. repository);
+1. data: It contains all the data access and manipulation components, which are then aggregated in a single data manager class;
 2. di: Components, modules and helper classes/interfaces for dependency injection;
 3. ui: View classes (activities and fragments) along with their corresponding view models;
 4. utils: Utility classes.
 
+## Todo as soon as I have the time :) :
+* RecyclerView;
+* Add api call example (Retrofit and RxJava to fecth data, LiveData to populate the RecyclerView);
+* Refactor DataManager to an Interactor specific to each Activity/Fragment;
+* Refactor DatabaseHelper to a Repository-like structure;
 
 
 **This project was heavily based on [Google's Github browser example](https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample)**
