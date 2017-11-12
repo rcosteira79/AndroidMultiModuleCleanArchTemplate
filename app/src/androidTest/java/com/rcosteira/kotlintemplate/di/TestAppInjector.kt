@@ -15,7 +15,7 @@ import dagger.android.support.HasSupportFragmentInjector
 /**
  * Helper class to automatically inject fragments if they implement {@link Injectable}.
  */
-class AppInjector private constructor() {
+class TestAppInjector private constructor() {
 
     companion object {
         fun testInject(application: TestApp) {

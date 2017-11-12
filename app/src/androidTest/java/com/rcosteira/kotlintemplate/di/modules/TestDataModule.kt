@@ -22,10 +22,10 @@ class TestDataModule {
 
     @Singleton
     @Provides
-    fun provideDatabaseHelper(): DatabaseHelper = mock()
+    fun provideDatabaseHelper(): DatabaseHelper = mock() // TODO: Replace with real implementation, but fake database
 
     @Singleton
     @Provides
-    fun provideApiHelper(): ApiHelper = mock()
+    fun provideApiHelper(): ApiHelper = mock() // TODO: Replace with real implementation, but mockWebServer
 }
 

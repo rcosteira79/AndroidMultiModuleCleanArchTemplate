@@ -12,6 +12,6 @@ class TestNetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit {
-        return mock()
+        return mock() // TODO: Replace with real implementation, but mockWebServer
     }
 }
