@@ -8,6 +8,6 @@ import javax.inject.Inject
 class MenuViewModel @Inject constructor(
         dataManager: DataManager,
         compositeDisposable: CompositeDisposable
-): BaseViewModel(dataManager, compositeDisposable) {
+) : BaseViewModel(dataManager, compositeDisposable) {
 
 }

@@ -100,7 +100,11 @@ dependencies {
     // Logging
     implementation "com.github.ajalt:timberkt:$timberktVersion"
 
-    // Functional tests
+    // Memory Leak Detection
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+
+    // Instrumentation tests
     kaptAndroidTest "com.google.dagger:dagger-android-processor:$daggerVersion"
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -110,7 +114,7 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
     androidTestImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockitoKotlinVersion"
 
-    // Unit and Integration tests
+    // Local Unit and Integration tests
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockitoKotlinVersion"
