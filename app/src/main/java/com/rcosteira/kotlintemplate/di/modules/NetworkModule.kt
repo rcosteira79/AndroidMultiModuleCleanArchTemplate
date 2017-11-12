@@ -4,12 +4,12 @@ import com.github.ajalt.timberkt.Timber.i
 import com.rcosteira.kotlintemplate.utils.AppConstants
 import dagger.Module
 import dagger.Provides
-import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.OkHttpClient
-import javax.inject.Singleton
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Singleton
 
 @Module
 class NetworkModule {

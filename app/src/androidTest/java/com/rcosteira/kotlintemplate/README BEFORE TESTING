@@ -1,0 +1,11 @@
+To avoid flakiness, Google recommends that you turn off system animations on the virtual or physical device(s) used for testing.
+On your device, under Settings->Developer options disable the following 3 settings:
+Window animation scale
+Transition animation scale
+Animator duration scale
+
+If you need to activate Developer options:
+
+Go to settings -> about. Then, click on the build number until dev ops are unlocked!
+
+If you're curious for more info, check https://google.github.io/android-testing-support-library/docs/espresso/setup/index.html#setup-your-test-environment
