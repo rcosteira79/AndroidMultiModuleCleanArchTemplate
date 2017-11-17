@@ -26,8 +26,6 @@ The project comes with a basic **Dagger2** and **Architecture Components** imple
 * Refactor DatabaseHelper to a Repository-like structure;
 
 
-**This project was heavily based on [Google's Github browser example](https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample)**
-
 ## License
 ```
 Copyright 2017 Ricardo Costeira
