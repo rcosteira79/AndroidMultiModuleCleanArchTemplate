@@ -63,6 +63,11 @@ android {
             exclude 'META-INF/services/javax.annotation.processing.Processor'
         }
     }
+    sourceSets {
+        debug {
+            manifest.srcFile 'src/debug/AndroidManifest.xml'
+        }
+    }
 }
 
 dependencies {

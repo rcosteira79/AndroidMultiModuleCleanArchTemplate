@@ -1,9 +1,5 @@
 package com.rcosteira.kotlintemplate
 
-import com.rcosteira.kotlintemplate.di.TestAppInjector
+import android.app.Application
 
-class TestApp : App() {
-    override fun injectDaggerComponents() {
-        TestAppInjector.testInject(this)
-    }
-}
+class TestApp : Application()
