@@ -19,7 +19,9 @@ The project comes with a basic **Dagger2** and **Architecture Components** imple
 3. ui: View classes (activities and fragments) along with their corresponding view models;
 4. utils: Utility classes.
 
-## Todo as soon as I have the time :) :
+## Todo as soon as I have the time :) (in order):
+
+* Create new branch for large scale projects;
 * RecyclerView;
 * Add api call example (Retrofit and RxJava to fecth data, LiveData to populate the RecyclerView);
 * Refactor DataManager to an Interactor specific to each Activity/Fragment;
