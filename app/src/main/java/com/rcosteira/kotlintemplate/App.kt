@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Application
 import com.rcosteira.kotlintemplate.di.AppInjector
 import com.rcosteira.kotlintemplate.utils.ReleaseTree
-import com.sioslife.hidepixel.seninc.videocall.utils.LinkingDebugTree
+import com.rcosteira.kotlintemplate.utils.LinkingDebugTree
 import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector

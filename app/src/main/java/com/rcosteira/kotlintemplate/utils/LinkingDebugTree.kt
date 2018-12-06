@@ -1,4 +1,4 @@
-package com.sioslife.hidepixel.seninc.videocall.utils
+package com.rcosteira.kotlintemplate.utils
 
 import timber.log.Timber
 import java.util.regex.Pattern
