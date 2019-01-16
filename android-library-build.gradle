@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Android.compileSDK
+
+    defaultConfig {
+        minSdkVersion Android.minSDK
+        targetSdkVersion Android.targetSDK
+        versionCode Android.appVersionCode
+        versionName Android.appVersionName
+
+        /*javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }*/
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation Libraries.kotlinStdLib
+    implementation Libraries.dagger
+    implementation Libraries.daggerAndroid
+    implementation Libraries.daggerAndroidSupport
+    kapt Libraries.daggerCompiler
+    kapt Libraries.daggerAndroidProcessor
+}
+

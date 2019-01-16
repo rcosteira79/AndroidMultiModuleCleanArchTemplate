@@ -1,0 +1,47 @@
+apply plugin:  'jacoco'
+
+jacoco {
+    toolVersion Versions.jacoco
+}
+
+project.afterEvaluate {
+    android.applicationVariants.all { variant ->
+        def variantName = variant.name
+        def testTaskName = "test${variantName.capitalize()}UnitTest"
+        def uiTestCoverageTaskName = "create${variantName.capitalize()}CoverageReport"
+
+        tasks.create(name: "${testTaskName}Coverage", type: JacocoReport, dependsOn: ["$testTaskName", "$uiTestCoverageTaskName"]) {
+            group = "Reporting"
+            description = "Generate Jacoco coverage reports for the ${variantName.capitalize()} build."
+
+            reports {
+                html.enabled = true
+                xml.enabled = true
+            }
+
+            def excludes = [
+                    '**/R.class',
+                    '**/R$*.class',
+                    '**/BuildConfig.*',
+                    '**/Manifest*.*',
+                    '**/*Test*.*',
+                    'android/**/*.*'
+            ]
+            def javaClasses = fileTree(dir: variant.javaCompiler.destinationDir, excludes: excludes)
+            def kotlinClasses = fileTree(dir: "${buildDir}/tmp/kotlin-classes/${variantName}", excludes: excludes)
+            classDirectories = files([javaClasses, kotlinClasses])
+
+            sourceDirectories = files([
+                    "$project.projectDir/src/main/java",
+                    "$project.projectDir/src/${variantName}/java",
+                    "$project.projectDir/src/main/kotlin",
+                    "$project.projectDir/src/${variantName}/kotlin"
+            ])
+
+            executionData = files([
+                    "${project.buildDir}/jacoco/${testTaskName}.exec",
+                    fileTree(dir: "${project.buildDir}/outputs/code-coverage/connected/", includes: ["*.ec"])
+            ])
+        }
+    }
+}

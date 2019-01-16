@@ -1,16 +1,15 @@
-# kotlin-template
-Kotlin project template following an MVVM approach.
+# android-kotlin-template
+Android Kotlin project template following an MVVM approach.
 
 The project comes with a basic **Dagger2** and **Architecture Components** implementation.
 
 ## External libraries used
 * Dagger2: https://github.com/google/dagger
-* RxJava2: https://github.com/ReactiveX/RxJava
-* RxKotlin: https://github.com/ReactiveX/RxKotlin
-* RxAndroid: https://github.com/ReactiveX/RxAndroid
 * Retrofit (with OkHttp for logging): https://github.com/square/retrofit
 * Moshi: https://github.com/square/moshi
-* Timberkt: https://github.com/ajalt/timberkt
+* Timber: https://github.com/JakeWharton/timber
+* Firebase Crashlytics: https://firebase.google.com/docs/crashlytics/get-started#android
+* Gradle Versions Plugin: https://github.com/ben-manes/gradle-versions-plugin
 
 ## The project has the following packages:
 
@@ -19,18 +18,18 @@ The project comes with a basic **Dagger2** and **Architecture Components** imple
 3. ui: View classes (activities and fragments) along with their corresponding view models;
 4. utils: Utility classes.
 
+## In progress
+* Revamp project to multi module application following a Clean Architecture approach
+* Delete DataManager and start using repositories for each use case;
+
 ## Todo as soon as I have the time :) (in order):
 
-* Create new branch for large scale projects;
-* RecyclerView;
-* Add api call example (Retrofit and RxJava to fecth data, LiveData to populate the RecyclerView);
-* Refactor DataManager to an Interactor specific to each Activity/Fragment;
-* Refactor DatabaseHelper to a Repository-like structure;
-
+* RecyclerView and Data Binding example;
+* Add api call example (Retrofit and coroutines to fecth data, LiveData to populate the RecyclerView);
 
 ## License
 ```
-Copyright 2017 Ricardo Costeira
+Copyright 2019 Ricardo Costeira
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
