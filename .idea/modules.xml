@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/androidmultimodulecleanarchtemplate.iml" filepath="$PROJECT_DIR$/androidmultimodulecleanarchtemplate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidMultiModuleCleanArchTemplate.iml" filepath="$PROJECT_DIR$/AndroidMultiModuleCleanArchTemplate.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/logging/logging.iml" filepath="$PROJECT_DIR$/logging/logging.iml" />
