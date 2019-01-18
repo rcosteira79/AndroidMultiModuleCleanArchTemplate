@@ -1,5 +1,5 @@
-# android-kotlin-template
-Android Kotlin project template following an MVVM approach.
+# AndroidMultiModuleCleanArchTemplate
+Android template project following a multi module approach with clean architecture (still updating to clean architecture).
 
 The project comes with a basic **Dagger2** and **Architecture Components** implementation.
 
