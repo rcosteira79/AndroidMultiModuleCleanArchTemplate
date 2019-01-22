@@ -33,8 +33,8 @@ android {
             isMinifyEnabled = true
             isUseProguard = true
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
             )
         }
 
@@ -49,35 +49,23 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.logging))
+    implementation(project(Modules.core))
+    implementation(project(Modules.feature))
 
     implementation(Libraries.kotlinStdLib)
     // TODO check what needs to be removed
     implementation(AndroidLibraries.appCompat)
     implementation(AndroidLibraries.coreKtx)
-    implementation(AndroidLibraries.lifecycleExtensions)
     implementation(AndroidLibraries.constraintLayout)
     implementation(AndroidLibraries.materialDesign)
     implementation(AndroidLibraries.supportAnnotations)
     // TODO up to here
-    implementation(AndroidLibraries.navigationUI)
 
     implementation(Libraries.dagger)
     implementation(Libraries.daggerAndroid)
     implementation(Libraries.daggerAndroidSupport)
     kapt(Libraries.daggerCompiler)
     kapt(Libraries.daggerAndroidProcessor)
-
-    //implementation(Libraries.firebaseCore)
-    //implementation(Libraries.crashlytics)
-
-    implementation(Libraries.retrofit)
-    implementation(Libraries.retrofitConverter)
-    implementation(Libraries.okHttp)
-    implementation(Libraries.okHttpLoggingInterceptor)
-
-    implementation(Libraries.timber)
-
 
     debugImplementation(Libraries.leakCanaryDebug)
     releaseImplementation(Libraries.leakCanaryRelease)

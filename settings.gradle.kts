@@ -1,1 +1,1 @@
-include("app", "logging")
+include("app", "logging", "core", "feature")

@@ -1,6 +1,7 @@
 object Modules {
     const val core = ":core"
     const val logging = ":logging"
+    const val feature = ":feature"
 }
 
 object Versions {
