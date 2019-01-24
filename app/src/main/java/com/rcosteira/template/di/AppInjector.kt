@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import com.rcosteira.core.di.Injectable
 import com.rcosteira.template.App
 import com.rcosteira.template.di.components.DaggerAppComponent
 import dagger.android.AndroidInjection

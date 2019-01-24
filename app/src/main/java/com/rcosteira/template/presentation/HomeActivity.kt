@@ -1,23 +1,23 @@
 package com.rcosteira.template.presentation
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
-import com.rcosteira.androidkotlintemplate.R
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.rcosteira.template.R
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
 
-import kotlinx.android.synthetic.main.activity_home.*
+class HomeActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
-class HomeActivity : AppCompatActivity() {
+    @Inject
+    lateinit var supportFragmentInjector: DispatchingAndroidInjector<Fragment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
     }
 
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = supportFragmentInjector
 }

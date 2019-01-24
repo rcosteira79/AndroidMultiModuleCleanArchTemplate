@@ -33,5 +33,4 @@ class ViewModelFactory @Inject constructor(private val viewModels: MutableMap<Cl
             throw RuntimeException(e)
         }
     }
-
 }
