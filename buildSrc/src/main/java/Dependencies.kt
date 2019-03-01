@@ -40,17 +40,15 @@ object Versions {
     const val leakCanary = "1.6.2"
 
     // Dependency injection
-    // TODO 2.17 and above generates a compiler error that has nothing to do with Dagger. More info in
-    // TODO https://github.com/google/dagger/issues/1245
-    const val dagger = "2.16"
+    const val dagger = "2.21"
 
     // Network
     const val retrofit = "2.5.0"
-    const val okHttp = "3.12.1"
+    const val okHttp = "3.13.1"
 }
 
 object Android {
-    const val applicationId = "com.rcosteira.androidkotlintemplate"
+    const val applicationId = "com.rcosteira.template"
     const val minSDK = 16
     const val compileSDK = 28
     const val targetSDK = 28

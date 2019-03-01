@@ -2,7 +2,6 @@ package com.rcosteira.template.di.components
 
 import android.content.Context
 import com.example.feature.di.FeatureModule
-import com.rcosteira.core.di.modules.DataModule
 import com.rcosteira.core.di.modules.ViewModelFactoryModule
 import com.rcosteira.template.App
 import com.rcosteira.template.di.modules.HomeModule
