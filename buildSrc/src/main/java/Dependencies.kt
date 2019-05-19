@@ -7,42 +7,41 @@ object Modules {
 object Versions {
     // Plugins
     const val androidGradlePlugin = "3.3.0"
-    const val gradleVersionsPlugin = "0.20.0"
+    const val gradleVersionsPlugin = "0.21.0"
 
     // Kotlin version
-    const val kotlin = "1.3.11"
+    const val kotlin = "1.3.31"
+    const val coroutines = "1.2.1"
 
     // Android libraries
-    const val support = "1.0.2"
-    const val supportAnnotations = "1.0.1"
-    const val coreKtx = "1.0.1"
-    const val materialDesign = "1.1.0-alpha02"
-    const val constraintLayout = "1.1.3"
-    const val coroutines = "1.0.1"
-    const val room = "2.1.0-alpha03"
-    const val navigation = "1.0.0-alpha09"
-    const val lifecycleExtenstions = "2.0.0-rc01"
+    const val support = "1.1.0-alpha05"
+    const val supportAnnotations = "1.1.0-rc01"
+    const val coreKtx = "1.2.0-alpha01"
+    const val materialDesign = "1.1.0-alpha06"
+    const val constraintLayout = "2.0.0-beta1"
+    const val room = "2.1.0-beta01"
+    const val navigation = "1.0.0"
     const val dataBinding = "3.2.1"
-    const val recyclerView = "1.0.0"
+    const val recyclerView = "1.1.0-alpha05"
+    const val lifecycleExtensions = "2.0.0"
+
 
     // Testing
     const val junit = "4.12"
-    const val espresso = "3.1.1"
-    const val testRunner = "1.1.1"
-    const val jacoco = "0.8.2"
+    const val espresso = "3.2.0-beta01"
+    const val testRunner = "1.2.0-beta01"
+    const val jacoco = "0.8.4"
 
     // Logging and error handling
     const val timber = "4.7.1"
-    const val fabric = "1.26.1"
-    const val firebaseCore = "16.0.6"
-    const val crashlytics = "2.9.7"
+    const val fabric = "1.29.0"
+    const val firebaseCore = "16.0.9"
+    const val crashlytics = "2.10.0"
     const val googleServices = "4.2.0"
-    const val leakCanary = "1.6.2"
+    const val leakCanary = "2.0-alpha-1"
 
     // Dependency injection
-    // TODO 2.17 and above generates a compiler error that has nothing to do with Dagger. More info in
-    // TODO https://github.com/google/dagger/issues/1245
-    const val dagger = "2.16"
+    const val dagger = "2.22.1"
 
     // Network
     const val retrofit = "2.5.0"
@@ -71,11 +70,7 @@ object Libraries {
     const val crashlytics = "com.crashlytics.sdk.android:crashlytics:${Versions.crashlytics}"
 
     // Leak canary
-    const val leakCanaryDebug = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
-    const val leakCanaryRelease =
-        "com.squareup.leakcanary:leakcanary-android-no-op:${Versions.leakCanary}"
-    const val leakCanaryFragments =
-        "com.squareup.leakcanary:leakcanary-support-fragment:${Versions.leakCanary}"
+    const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
 
     // Dagger
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
@@ -96,7 +91,7 @@ object AndroidLibraries {
     const val appCompat = "androidx.appcompat:appcompat:${Versions.support}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     const val lifecycleExtensions =
-        "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycleExtenstions}"
+        "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycleExtensions}"
     const val constraintLayout =
         "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val materialDesign = "com.google.android.material:material:${Versions.materialDesign}"

@@ -67,9 +67,7 @@ dependencies {
     kapt(Libraries.daggerCompiler)
     kapt(Libraries.daggerAndroidProcessor)
 
-    debugImplementation(Libraries.leakCanaryDebug)
-    releaseImplementation(Libraries.leakCanaryRelease)
-    debugImplementation(Libraries.leakCanaryFragments)
+    debugImplementation(Libraries.leakCanary)
 }
 
 /*

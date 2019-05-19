@@ -20,7 +20,5 @@ dependencies {
     "implementation"(Libraries.okHttp)
     "implementation"(Libraries.okHttpLoggingInterceptor)
 
-    "debugImplementation"(Libraries.leakCanaryDebug)
-    "releaseImplementation"(Libraries.leakCanaryRelease)
-    "debugImplementation"(Libraries.leakCanaryFragments)
+    "debugImplementation"(Libraries.leakCanary)
 }

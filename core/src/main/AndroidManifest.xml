@@ -5,11 +5,6 @@
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="false" />
-
-        <provider
-            android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.rcosteira.pumptracker.firebaseinitprovider"
-            android:enabled="false" />
     </application>
 
 </manifest>
