@@ -41,11 +41,7 @@ object Versions {
     const val leakCanary = "2.0-alpha-1"
 
     // Dependency injection
-<<<<<<< HEAD
     const val dagger = "2.22.1"
-=======
-    const val dagger = "2.21"
->>>>>>> 683ef164a3852e1f854db983e82bff1353fc3426
 
     // Network
     const val retrofit = "2.5.0"

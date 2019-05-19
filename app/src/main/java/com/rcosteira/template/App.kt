@@ -4,14 +4,13 @@ import android.app.Activity
 import android.app.Application
 import com.rcosteira.core.Core
 import com.rcosteira.template.di.AppInjector
-import com.rcosteira.logging.Logger
-import com.squareup.leakcanary.LeakCanary
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
 
-open class App : Application(), HasActivityInjector {
+// If More android injectors are needed, consider using DaggerApplication instead
+class App : Application(), HasActivityInjector {
 
     @Inject
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>
@@ -23,7 +22,7 @@ open class App : Application(), HasActivityInjector {
         initDagger()
     }
 
-    open fun initDagger() {
+    private fun initDagger() {
         AppInjector.init(this)
     }
 
