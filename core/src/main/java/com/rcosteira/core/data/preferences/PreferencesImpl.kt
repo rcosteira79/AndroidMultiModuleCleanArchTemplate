@@ -4,7 +4,7 @@ import android.content.Context
 import com.rcosteira.core.data.AppConstants
 import javax.inject.Inject
 
-class PreferencesHelperImpl @Inject constructor(context: Context): PreferencesHelper {
+class PreferencesImpl @Inject constructor(context: Context): Preferences {
 
     private val preferences = context.getSharedPreferences(
             AppConstants.PREFERENCES_NAME, Context.MODE_PRIVATE)

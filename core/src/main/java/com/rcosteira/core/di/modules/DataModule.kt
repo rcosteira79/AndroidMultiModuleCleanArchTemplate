@@ -1,9 +1,9 @@
 package com.rcosteira.core.di.modules
 
-import com.rcosteira.core.data.api.ApiHelper
-import com.rcosteira.core.data.api.ApiHelperImpl
-import com.rcosteira.core.data.preferences.PreferencesHelper
-import com.rcosteira.core.data.preferences.PreferencesHelperImpl
+import com.rcosteira.core.data.api.Api
+import com.rcosteira.core.data.api.ApiImpl
+import com.rcosteira.core.data.preferences.Preferences
+import com.rcosteira.core.data.preferences.PreferencesImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -13,11 +13,10 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideApiHelper(apiHelperImpl: ApiHelperImpl): ApiHelper = apiHelperImpl
+    fun provideApi(apiImpl: ApiImpl): Api = apiImpl
 
 
     @Singleton
     @Provides
-    fun providePreferencesHelper(preferencesHelperImpl: PreferencesHelperImpl): PreferencesHelper =
-        preferencesHelperImpl
+    fun providePreferences(preferencesImpl: PreferencesImpl): Preferences = preferencesImpl
 }

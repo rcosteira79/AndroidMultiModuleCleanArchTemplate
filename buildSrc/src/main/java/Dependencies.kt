@@ -41,15 +41,19 @@ object Versions {
     const val leakCanary = "2.0-alpha-1"
 
     // Dependency injection
+<<<<<<< HEAD
     const val dagger = "2.22.1"
+=======
+    const val dagger = "2.21"
+>>>>>>> 683ef164a3852e1f854db983e82bff1353fc3426
 
     // Network
     const val retrofit = "2.5.0"
-    const val okHttp = "3.12.1"
+    const val okHttp = "3.13.1"
 }
 
 object Android {
-    const val applicationId = "com.rcosteira.androidkotlintemplate"
+    const val applicationId = "com.rcosteira.template"
     const val minSDK = 16
     const val compileSDK = 28
     const val targetSDK = 28

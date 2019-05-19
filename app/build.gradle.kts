@@ -33,8 +33,8 @@ android {
             isMinifyEnabled = true
             isUseProguard = true
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
 
@@ -45,6 +45,11 @@ android {
             versionNameSuffix = "-debug"
             isTestCoverageEnabled = true
         }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
