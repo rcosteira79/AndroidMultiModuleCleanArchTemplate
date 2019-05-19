@@ -3,7 +3,7 @@ package com.rcosteira.template
 import android.app.Activity
 import android.app.Application
 import com.rcosteira.core.Core
-import com.rcosteira.template.di.AppInjector
+import com.rcosteira.template.di.components.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -23,7 +23,10 @@ class App : Application(), HasActivityInjector {
     }
 
     private fun initDagger() {
-        AppInjector.init(this)
+        DaggerAppComponent.builder()
+            .application(this)
+            .build()
+            .inject(this)
     }
 
     override fun activityInjector(): AndroidInjector<Activity> {

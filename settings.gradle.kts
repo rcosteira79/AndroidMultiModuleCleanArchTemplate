@@ -1,1 +1,1 @@
-include("app", "logging", "core", "feature")
+include("app", "logging", "core", "tabswithlists")

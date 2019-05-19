@@ -1,4 +1,4 @@
-package com.example.feature;
+package com.example.tabswithlists;
 
 import org.junit.Test;
 

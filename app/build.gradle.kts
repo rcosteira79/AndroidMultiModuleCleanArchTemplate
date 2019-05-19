@@ -55,16 +55,14 @@ android {
 
 dependencies {
     implementation(project(Modules.core))
-    implementation(project(Modules.feature))
+    implementation(project(Modules.tabswithlists))
 
     implementation(Libraries.kotlinStdLib)
-    // TODO check what needs to be removed
     implementation(AndroidLibraries.appCompat)
     implementation(AndroidLibraries.coreKtx)
     implementation(AndroidLibraries.constraintLayout)
     implementation(AndroidLibraries.materialDesign)
     implementation(AndroidLibraries.supportAnnotations)
-    // TODO up to here
 
     implementation(Libraries.dagger)
     implementation(Libraries.daggerAndroid)
@@ -73,6 +71,10 @@ dependencies {
     kapt(Libraries.daggerAndroidProcessor)
 
     debugImplementation(Libraries.leakCanary)
+
+    testImplementation(TestingLibraries.junit)
+    testImplementation(TestingLibraries.testRunner)
+
 }
 
 /*

@@ -1,24 +1,24 @@
-package com.example.feature.presentation
+package com.example.tabswithlists.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.feature.R
+import com.example.tabswithlists.R
 import com.rcosteira.core.ui.BaseFragment
 import javax.inject.Inject
 
-class FeatureFragment : BaseFragment() {
+class TabsWithListsFragment : BaseFragment() {
 
     @Inject
-    lateinit var viewModel: FeatureViewModel
+    lateinit var viewModel: TabsWithListsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_feature, container, false)
+        return inflater.inflate(R.layout.fragment_tabs_with_lists, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

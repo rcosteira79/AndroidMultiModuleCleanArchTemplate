@@ -3,10 +3,10 @@ package com.rcosteira.core.ui
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.rcosteira.core.di.Injectable
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-open class BaseFragment : Fragment(), Injectable {
+open class BaseFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
