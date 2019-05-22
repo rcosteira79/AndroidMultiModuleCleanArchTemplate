@@ -1,7 +1,7 @@
 object Modules {
     const val core = ":core"
     const val logging = ":logging"
-    const val tabswithlists = ":tabswithlists"
+    const val recyclerviewexample = ":recyclerviewexample"
 }
 
 object Versions {
@@ -46,6 +46,7 @@ object Versions {
     // Network
     const val retrofit = "2.5.0"
     const val okHttp = "3.13.1"
+    const val retrofitCoroutineAdapter = "0.9.2"
 }
 
 object Android {
@@ -83,6 +84,8 @@ object Libraries {
     // Network
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+    const val retrofitCoroutineAdapter =
+        "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofitCoroutineAdapter}"
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
     const val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
 }

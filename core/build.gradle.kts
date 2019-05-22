@@ -15,10 +15,11 @@ dependencies {
     //"implementation"(Libraries.firebaseCore)
     //"implementation"(Libraries.crashlytics)
 
-    "implementation"(Libraries.retrofit)
-    "implementation"(Libraries.retrofitConverter)
-    "implementation"(Libraries.okHttp)
-    "implementation"(Libraries.okHttpLoggingInterceptor)
+    "api"(Libraries.retrofit)
+    "api"(Libraries.retrofitConverter)
+    "api"(Libraries.retrofitCoroutineAdapter)
+    "api"(Libraries.okHttp)
+    "api"(Libraries.okHttpLoggingInterceptor)
 
     "debugImplementation"(Libraries.leakCanary)
 }

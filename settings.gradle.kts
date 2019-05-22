@@ -1,1 +1,1 @@
-include("app", "logging", "core", "tabswithlists")
+include("app", "logging", "core", "recyclerviewexample")

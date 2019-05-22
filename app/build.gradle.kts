@@ -55,7 +55,7 @@ android {
 
 dependencies {
     implementation(project(Modules.core))
-    implementation(project(Modules.tabswithlists))
+    implementation(project(Modules.recyclerviewexample))
 
     implementation(Libraries.kotlinStdLib)
     implementation(AndroidLibraries.appCompat)
