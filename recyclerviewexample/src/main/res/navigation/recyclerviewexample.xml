@@ -2,12 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tabswithlists"
-    app:startDestination="@id/tabsWithListsFragment">
+    android:id="@+id/recyclerViewExample"
+    app:startDestination="@id/recyclerViewExampleFragment">
 
     <fragment
-        android:id="@+id/tabsWithListsFragment"
+        android:id="@+id/recyclerViewExampleFragment"
         android:name="com.rcosteira.recyclerviewexample.presentation.RecyclerViewExampleFragment"
-        android:label="TabsWithListsFragment"
-        tools:layout="@layout/fragment_tabs_with_lists" />
+        android:label="@string/recycler_view_example_app_name"
+        tools:layout="@layout/fragment_recycler_view_example" />
 </navigation>

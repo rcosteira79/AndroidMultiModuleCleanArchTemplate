@@ -60,7 +60,6 @@ dependencies {
     implementation(Libraries.kotlinStdLib)
     implementation(AndroidLibraries.appCompat)
     implementation(AndroidLibraries.coreKtx)
-    implementation(AndroidLibraries.constraintLayout)
     implementation(AndroidLibraries.materialDesign)
     implementation(AndroidLibraries.supportAnnotations)
 

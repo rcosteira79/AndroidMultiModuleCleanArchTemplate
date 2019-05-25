@@ -17,7 +17,7 @@ package com.rcosteira.core.exception
 
 /**
  * Base Class for handling errors/failures/exceptions.
- * Every tabswithlists specific failure should extend [FeatureFailure] class.
+ * Every recyclerviewexample specific failure should extend [FeatureFailure] class.
  */
 sealed class Failure {
     object NoFailure : Failure()

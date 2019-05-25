@@ -3,8 +3,9 @@ package com.rcosteira.recyclerviewexample.data.mappers
 import com.rcosteira.core.data.Mapper
 import com.rcosteira.recyclerviewexample.data.entities.GithubUser
 import com.rcosteira.recyclerviewexample.domain.entities.User
+import javax.inject.Inject
 
-class UserMapper : Mapper<User, GithubUser> {
+class UserMapper @Inject constructor() : Mapper<User, GithubUser> {
     override fun mapToEntity(type: GithubUser): User {
         return User(
             id = type.id,

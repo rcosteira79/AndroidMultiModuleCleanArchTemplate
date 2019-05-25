@@ -2,8 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/app"
-    app:startDestination="@id/tabswithlists">
+    app:startDestination="@id/recyclerViewExample">
 
 
-    <include app:graph="@navigation/tabswithlists" />
+    <include app:graph="@navigation/recyclerviewexample" />
 </navigation>
