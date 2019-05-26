@@ -56,6 +56,7 @@ class RecyclerViewExampleViewModel @Inject constructor(
         return if (numberOfSelectedUsers > 0) " ($numberOfSelectedUsers)" else ""
     }
 
+    // TODO check if we already have the user list before calling the API
     private fun getUsers() = getUsers(uiScope, UseCase.None()) {
         it.either(
             ::handleFailure,
