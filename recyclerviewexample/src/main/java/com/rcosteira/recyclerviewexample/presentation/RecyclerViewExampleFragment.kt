@@ -9,6 +9,7 @@ import com.rcosteira.core.exception.Failure
 import com.rcosteira.core.extensions.observe
 import com.rcosteira.core.ui.BaseFragment
 import com.rcosteira.recyclerviewexample.R
+import com.rcosteira.recyclerviewexample.presentation.RecyclerViewExampleEvents.ItemWasCheckboxedEvent
 import com.rcosteira.recyclerviewexample.presentation.entities.DisplayedUser
 import kotlinx.android.synthetic.main.fragment_recycler_view_example.*
 import javax.inject.Inject
@@ -31,6 +32,7 @@ class RecyclerViewExampleFragment : BaseFragment(), RecyclerViewRowClickListener
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        progressBarLoading.show()
         setRecyclerView()
 
         viewModel = createViewModel(this) {
@@ -50,20 +52,13 @@ class RecyclerViewExampleFragment : BaseFragment(), RecyclerViewRowClickListener
     }
 
     private fun renderViewState(state: RecyclerViewExampleViewState) {
-
-        when (state) {
-            is RecyclerViewExampleViewState.Loading -> renderLoadingState()
-            is RecyclerViewExampleViewState.GotUsers -> renderUserList(state.users)
-            is RecyclerViewExampleViewState.SelectedUsersChanged -> renderButton(state.selectedUsers)
-            is RecyclerViewExampleViewState.PossibleFailure -> renderPossibleFailure(state.failure)
-        }
-    }
-
-    private fun renderLoadingState() {
-        progressBarLoading.show()
+        renderUserList(state.userList)
+        renderButton(state.buttonLabel)
+        renderPossibleFailure(state.possibleFailure)
     }
 
     private fun renderUserList(users: List<DisplayedUser>) {
+        progressBarLoading.hide()
         adapter.submitList(users)
     }
 
@@ -73,12 +68,12 @@ class RecyclerViewExampleFragment : BaseFragment(), RecyclerViewRowClickListener
     }
 
     private fun renderPossibleFailure(failure: Failure) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO computer says no
     }
 
     override fun onRowClicked(item: DisplayedUser, position: Int) {
-        viewModel.updateNumberOfSelectedUsers(item.isChecked)
-        viewModel.updateButtonLabel()
+        val event = ItemWasCheckboxedEvent(item.isChecked, position)
+        viewModel.processEvents(event)
     }
 
     override fun onDestroyView() {

@@ -1,11 +1,12 @@
 package com.rcosteira.recyclerviewexample.presentation
 
 import com.rcosteira.core.exception.Failure
+import com.rcosteira.core.exception.Failure.NoFailure
 import com.rcosteira.recyclerviewexample.presentation.entities.DisplayedUser
 
-sealed class RecyclerViewExampleViewState {
-    object Loading : RecyclerViewExampleViewState()
-    data class GotUsers(val users: List<DisplayedUser>) : RecyclerViewExampleViewState()
-    data class SelectedUsersChanged(val selectedUsers: String) : RecyclerViewExampleViewState()
-    data class PossibleFailure(val failure: Failure) : RecyclerViewExampleViewState()
-}
+data class RecyclerViewExampleViewState(
+    val userList: List<DisplayedUser> = emptyList(),
+    val buttonLabel: String = "",
+    val selectedUsers: Int = 0,
+    val possibleFailure: Failure = NoFailure
+)
