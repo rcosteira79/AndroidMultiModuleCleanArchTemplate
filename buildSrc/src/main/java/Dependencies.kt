@@ -6,25 +6,24 @@ object Modules {
 
 object Versions {
     // Plugins
-    const val androidGradlePlugin = "3.3.0"
+    const val androidGradlePlugin = "3.5.0-rc01"
     const val gradleVersionsPlugin = "0.21.0"
 
-    // Kotlin version
-    const val kotlin = "1.3.31"
-    const val coroutines = "1.2.1"
+    // Kotlin
+    const val kotlin = "1.3.41"
+    const val coroutines = "1.3.0-RC"
 
     // Android libraries
-    const val support = "1.1.0-alpha05"
-    const val supportAnnotations = "1.1.0-rc01"
-    const val coreKtx = "1.2.0-alpha01"
-    const val materialDesign = "1.1.0-alpha06"
-    const val constraintLayout = "2.0.0-beta1"
+    const val support = "1.1.0-rc01"
+    const val supportAnnotations = "1.1.0"
+    const val coreKtx = "1.2.0-alpha02"
+    const val materialDesign = "1.1.0-alpha08"
+    const val constraintLayout = "2.0.0-beta2"
     const val room = "2.1.0-beta01"
     const val navigation = "1.0.0"
     const val dataBinding = "3.2.1"
-    const val recyclerView = "1.1.0-alpha05"
+    const val recyclerView = "1.1.0-beta01"
     const val lifecycleExtensions = "2.0.0"
-
 
     // Testing
     const val junit = "4.12"
@@ -34,18 +33,18 @@ object Versions {
 
     // Logging and error handling
     const val timber = "4.7.1"
-    const val fabric = "1.29.0"
-    const val firebaseCore = "16.0.9"
-    const val crashlytics = "2.10.0"
-    const val googleServices = "4.2.0"
-    const val leakCanary = "2.0-alpha-1"
+    const val fabric = "1.30.0"
+    const val firebaseCore = "17.0.1"
+    const val crashlytics = "2.10.1"
+    const val googleServices = "4.3.0"
+    const val leakCanary = "2.0-alpha-3"
 
     // Dependency injection
-    const val dagger = "2.22.1"
+    const val dagger = "2.23.2"
 
     // Network
-    const val retrofit = "2.5.0"
-    const val okHttp = "3.13.1"
+    const val retrofit = "2.6.0"
+    const val okHttp = "4.0.1"
     const val retrofitCoroutineAdapter = "0.9.2"
 }
 
@@ -87,7 +86,8 @@ object Libraries {
     const val retrofitCoroutineAdapter =
         "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofitCoroutineAdapter}"
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
-    const val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+    const val okHttpLoggingInterceptor =
+        "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
 }
 
 object AndroidLibraries {
