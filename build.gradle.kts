@@ -19,7 +19,7 @@ buildscript {
         classpath("com.github.ben-manes:gradle-versions-plugin:${Versions.gradleVersionsPlugin}")
         classpath("android.arch.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}")
         // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle.kts files
+        // in the individual module build.gradle.kts.kts files
     }
 }
 

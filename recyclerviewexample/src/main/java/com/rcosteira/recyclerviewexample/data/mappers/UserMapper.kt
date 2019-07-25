@@ -1,8 +1,8 @@
 package com.rcosteira.recyclerviewexample.data.mappers
 
 import com.rcosteira.core.data.Mapper
-import com.rcosteira.recyclerviewexample.data.entities.GithubUser
-import com.rcosteira.recyclerviewexample.domain.entities.User
+import com.rcosteira.core.data.entities.GithubUser
+import com.rcosteira.core.domain.entities.User
 import javax.inject.Inject
 
 class UserMapper @Inject constructor() : Mapper<User, GithubUser> {

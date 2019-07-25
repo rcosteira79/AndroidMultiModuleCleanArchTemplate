@@ -12,16 +12,28 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : DaggerAppCompatActivity() {
 
-    private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        navController = findNavController(R.id.nav_host_fragment)
+        val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
+
+        setupActionBar(navController, appBarConfiguration)
+        setupBottomNavigationBar(navController)
+    }
+
+    private fun setupActionBar(
+        navController: NavController,
+        appBarConfiguration: AppBarConfiguration
+    ) {
         toolbar.setupWithNavController(navController, appBarConfiguration)
+    }
+
+    private fun setupBottomNavigationBar(navController: NavController) {
+        bottomNavigation.setupWithNavController(navController)
+
     }
 }

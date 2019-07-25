@@ -1,7 +1,9 @@
 package com.rcosteira.recyclerviewexample.di
 
+import com.rcosteira.core.di.modules.ApiModule
+import com.rcosteira.core.di.scopes.ActivityScope
+import com.rcosteira.core.domain.repositories.Repository
 import com.rcosteira.recyclerviewexample.data.GithubRepository
-import com.rcosteira.recyclerviewexample.domain.repositories.Repository
 import dagger.Binds
 import dagger.Module
 
@@ -9,6 +11,6 @@ import dagger.Module
 abstract class DataModule {
 
     @Binds
-    @RecyclerViewExampleScope
+    @ActivityScope
     abstract fun bindRepository(repository: GithubRepository): Repository
 }

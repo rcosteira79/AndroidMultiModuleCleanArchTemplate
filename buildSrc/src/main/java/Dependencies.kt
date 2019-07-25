@@ -2,6 +2,7 @@ object Modules {
     const val core = ":core"
     const val logging = ":logging"
     const val recyclerviewexample = ":recyclerviewexample"
+    const val rxjavatokotlinflows = ":rxjavatokotlinflows"
 }
 
 object Versions {
@@ -46,6 +47,9 @@ object Versions {
     const val retrofit = "2.6.0"
     const val okHttp = "4.0.1"
     const val retrofitCoroutineAdapter = "0.9.2"
+
+    // Rx
+    const val rxjava = "3.0.0-RC1"
 }
 
 object Android {
@@ -88,6 +92,7 @@ object Libraries {
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
     const val okHttpLoggingInterceptor =
         "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+    const val rxJava = "io.reactivex.rxjava3:rxjava:${Versions.rxjava}"
 }
 
 object AndroidLibraries {

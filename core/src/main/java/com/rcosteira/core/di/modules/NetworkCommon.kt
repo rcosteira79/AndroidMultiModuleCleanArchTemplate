@@ -18,7 +18,12 @@ class NetworkCommon {
 
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        val interceptor = HttpLoggingInterceptor { message -> Logger.i(message) }
+        val interceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                Logger.i(message)
+            }
+        })
+
         interceptor.level = HttpLoggingInterceptor.Level.BASIC
 
         return interceptor

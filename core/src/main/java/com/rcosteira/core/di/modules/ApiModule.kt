@@ -1,8 +1,9 @@
-package com.rcosteira.recyclerviewexample.di
+package com.rcosteira.core.di.modules
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.rcosteira.recyclerviewexample.data.api.Api
-import com.rcosteira.recyclerviewexample.data.api.GithubApi
+import com.rcosteira.core.data.api.Api
+import com.rcosteira.core.data.api.GithubApi
+import com.rcosteira.core.di.scopes.ActivityScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -14,12 +15,12 @@ class ApiModule {
 
 
     @Provides
-    @RecyclerViewExampleScope
+    @ActivityScope
     fun provideApi(githubApi: GithubApi): Api = githubApi
 
 
     @Provides
-    @RecyclerViewExampleScope
+    @ActivityScope
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api.github.com")

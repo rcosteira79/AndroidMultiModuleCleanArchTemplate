@@ -1,6 +1,6 @@
-package com.rcosteira.recyclerviewexample.data.api
+package com.rcosteira.core.data.api
 
-import com.rcosteira.recyclerviewexample.data.entities.GithubUser
+import com.rcosteira.core.data.entities.GithubUser
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 

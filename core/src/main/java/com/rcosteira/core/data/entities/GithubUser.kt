@@ -1,4 +1,4 @@
-package com.rcosteira.recyclerviewexample.data.entities
+package com.rcosteira.core.data.entities
 
 import com.squareup.moshi.Json
 

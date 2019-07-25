@@ -56,6 +56,7 @@ android {
 dependencies {
     implementation(project(Modules.core))
     implementation(project(Modules.recyclerviewexample))
+    implementation(project(Modules.rxjavatokotlinflows))
 
     implementation(Libraries.kotlinStdLib)
     implementation(AndroidLibraries.appCompat)

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.rcosteira.core.exception.Failure
 import com.rcosteira.core.interactors.UseCase
 import com.rcosteira.core.ui.BaseViewModel
-import com.rcosteira.recyclerviewexample.domain.entities.User
+import com.rcosteira.core.domain.entities.User
 import com.rcosteira.recyclerviewexample.domain.usecases.GetUsers
 import com.rcosteira.recyclerviewexample.presentation.RecyclerViewExampleEvents.GetUsersEvent
 import com.rcosteira.recyclerviewexample.presentation.RecyclerViewExampleEvents.ItemWasCheckboxedEvent

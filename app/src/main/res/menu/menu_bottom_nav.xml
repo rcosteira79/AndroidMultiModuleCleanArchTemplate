@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/recyclerViewExample"
+        android:icon="@drawable/recycler_view_icon"
+        android:title="@string/recycler_view_example_app_name"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/rxJavaToKotlinFlows"
+        android:icon="@drawable/rx_java_kotlin_flows_icon"
+        android:title="@string/rx_java_to_kotlin_flows_app_name"
+        app:showAsAction="ifRoom" />
+</menu>

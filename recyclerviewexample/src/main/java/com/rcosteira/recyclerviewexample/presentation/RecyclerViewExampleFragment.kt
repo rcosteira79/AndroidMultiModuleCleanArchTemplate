@@ -19,7 +19,7 @@ class RecyclerViewExampleFragment : BaseFragment(), RecyclerViewRowClickListener
     @Inject
     lateinit var viewModel: RecyclerViewExampleViewModel
 
-    lateinit var adapter: UsersAdapter
+    private lateinit var adapter: UsersAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

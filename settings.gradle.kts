@@ -1,1 +1,1 @@
-include("app", "logging", "core", "recyclerviewexample")
+include("app", "logging", "core", "recyclerviewexample", "rxjavatokotlinflows")

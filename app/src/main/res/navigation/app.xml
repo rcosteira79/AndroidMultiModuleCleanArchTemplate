@@ -4,6 +4,6 @@
     android:id="@+id/app"
     app:startDestination="@id/recyclerViewExample">
 
-
     <include app:graph="@navigation/recyclerviewexample" />
+    <include app:graph="@navigation/rxjavatokotlinflows" />
 </navigation>

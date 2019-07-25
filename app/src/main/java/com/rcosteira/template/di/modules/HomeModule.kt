@@ -2,6 +2,7 @@ package com.rcosteira.template.di.modules
 
 import com.rcosteira.core.di.scopes.ActivityScope
 import com.rcosteira.recyclerviewexample.di.RecyclerViewExampleModule
+import com.rcosteira.rxjavatokotlinflows.RxJavaToKotlinFlowsModule
 import com.rcosteira.template.presentation.HomeActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -10,6 +11,11 @@ import dagger.android.ContributesAndroidInjector
 abstract class HomeModule {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = [RecyclerViewExampleModule::class])
+    @ContributesAndroidInjector(
+        modules = [
+            RecyclerViewExampleModule::class,
+            RxJavaToKotlinFlowsModule::class
+        ]
+    )
     abstract fun provideHomeActivity(): HomeActivity
 }

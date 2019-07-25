@@ -1,4 +1,4 @@
-package com.rcosteira.recyclerviewexample.domain.entities
+package com.rcosteira.core.domain.entities
 
 data class User(
     val id: Int = -1,
