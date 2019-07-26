@@ -13,7 +13,7 @@ import dagger.multibindings.IntoMap
 abstract class RecyclerViewExampleModule {
 
     @RecyclerViewExampleScope
-    @ContributesAndroidInjector(modules = [DataModule::class])
+    @ContributesAndroidInjector
     abstract fun provideRecyclerViewExampleFragment(): RecyclerViewExampleFragment
 
     @Binds

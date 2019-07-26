@@ -1,4 +1,4 @@
-package com.rcosteira.recyclerviewexample.data.mappers
+package com.rcosteira.core.data.mappers
 
 import com.rcosteira.core.data.Mapper
 import com.rcosteira.core.data.entities.GithubUser

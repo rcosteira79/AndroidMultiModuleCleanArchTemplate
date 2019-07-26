@@ -1,4 +1,4 @@
-package com.rcosteira.recyclerviewexample.domain
+package com.rcosteira.core.domain
 
 import com.rcosteira.core.exception.Failure.FeatureFailure
 
