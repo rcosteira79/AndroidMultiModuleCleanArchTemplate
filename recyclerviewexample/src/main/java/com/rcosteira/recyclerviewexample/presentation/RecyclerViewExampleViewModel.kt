@@ -2,10 +2,10 @@ package com.rcosteira.recyclerviewexample.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.rcosteira.core.domain.entities.User
 import com.rcosteira.core.exception.Failure
 import com.rcosteira.core.interactors.UseCase
 import com.rcosteira.core.ui.BaseViewModel
-import com.rcosteira.core.domain.entities.User
 import com.rcosteira.recyclerviewexample.domain.usecases.GetUsers
 import com.rcosteira.recyclerviewexample.presentation.RecyclerViewExampleEvents.GetUsersEvent
 import com.rcosteira.recyclerviewexample.presentation.RecyclerViewExampleEvents.ItemWasCheckboxedEvent
@@ -48,7 +48,11 @@ class RecyclerViewExampleViewModel @Inject constructor(
         _viewState.value?.userList?.let {
             it[position].isChecked = itemIsChecked
             _viewState.value =
-                _viewState.value?.copy(userList = it, buttonLabel = buttonLabel, selectedUsers = checkedItems)
+                _viewState.value?.copy(
+                    userList = it,
+                    buttonLabel = buttonLabel,
+                    selectedUsers = checkedItems
+                )
         }
     }
 
@@ -56,7 +60,7 @@ class RecyclerViewExampleViewModel @Inject constructor(
         return if (numberOfSelectedUsers > 0) " ($numberOfSelectedUsers)" else ""
     }
 
-    // TODO check if we already have the user list before calling the API
+    // Not caching on purpose. For a caching example, see the rxjavatokotlinflows module
     private fun getUsers() = getUsers(uiScope, UseCase.None()) {
         it.either(
             ::handleFailure,
@@ -65,11 +69,11 @@ class RecyclerViewExampleViewModel @Inject constructor(
     }
 
     private fun handleFailure(failure: Failure) {
-        _viewState.value = _viewState.value?.copy(possibleFailure = failure)
+        _viewState.value = _viewState.value?.copy(loading = false, possibleFailure = failure)
     }
 
     private fun handleUserList(users: List<User>) {
         val usersToDisplay = users.map { displayedUserMapper.mapToUI(it) }
-        _viewState.value = _viewState.value?.copy(userList = usersToDisplay)
+        _viewState.value = _viewState.value?.copy(loading = false, userList = usersToDisplay)
     }
 }

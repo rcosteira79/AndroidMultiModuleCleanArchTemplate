@@ -15,8 +15,8 @@ class GithubRepository @Inject constructor(
     private val api: Api,
     private val userMapper: UserMapper
 ) : Repository {
-    override suspend fun getUsersAsync(): Either<Failure, List<User>> {
-        val users = api.getAllUsersAsync().await()
+    override suspend fun getUsers(): Either<Failure, List<User>> {
+        val users = api.getAllUsers()
 
         if (users.isEmpty()) {
             return Left(NoUsers())

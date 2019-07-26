@@ -1,7 +1,7 @@
 package com.rcosteira.template.di.components
 
 import android.content.Context
-import com.rcosteira.core.di.modules.NetworkCommon
+import com.rcosteira.core.di.modules.NetworkCommonModule
 import com.rcosteira.core.di.modules.PreferencesModule
 import com.rcosteira.core.di.modules.ViewModelFactoryModule
 import com.rcosteira.template.App
@@ -17,7 +17,7 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         HomeModule::class,
         PreferencesModule::class,
-        NetworkCommon::class,
+        NetworkCommonModule::class,
         ViewModelFactoryModule::class
     ]
 )

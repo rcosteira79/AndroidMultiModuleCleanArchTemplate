@@ -32,7 +32,6 @@ class RecyclerViewExampleFragment : BaseFragment(), RecyclerViewRowClickListener
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        progressBarLoading.show()
         setRecyclerView()
 
         viewModel = createViewModel(this) {
@@ -52,13 +51,21 @@ class RecyclerViewExampleFragment : BaseFragment(), RecyclerViewRowClickListener
     }
 
     private fun renderViewState(state: RecyclerViewExampleViewState) {
+        renderProgressBar(state.loading)
         renderUserList(state.userList)
         renderButton(state.buttonLabel)
         renderPossibleFailure(state.possibleFailure)
     }
 
+    private fun renderProgressBar(loading: Boolean) {
+        if (loading) {
+            progressBarLoading.show()
+        } else {
+            progressBarLoading.hide()
+        }
+    }
+
     private fun renderUserList(users: List<DisplayedUser>) {
-        progressBarLoading.hide()
         adapter.submitList(users)
     }
 

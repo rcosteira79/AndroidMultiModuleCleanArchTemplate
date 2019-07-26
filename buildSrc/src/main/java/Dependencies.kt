@@ -46,10 +46,9 @@ object Versions {
     // Network
     const val retrofit = "2.6.0"
     const val okHttp = "4.0.1"
-    const val retrofitCoroutineAdapter = "0.9.2"
 
     // Rx
-    const val rxjava = "3.0.0-RC1"
+    const val rxjava = "2.2.10"
 }
 
 object Android {
@@ -87,12 +86,11 @@ object Libraries {
     // Network
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
-    const val retrofitCoroutineAdapter =
-        "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofitCoroutineAdapter}"
+    const val rxJava2Adapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
     const val okHttpLoggingInterceptor =
         "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
-    const val rxJava = "io.reactivex.rxjava3:rxjava:${Versions.rxjava}"
+    const val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxjava}"
 }
 
 object AndroidLibraries {
