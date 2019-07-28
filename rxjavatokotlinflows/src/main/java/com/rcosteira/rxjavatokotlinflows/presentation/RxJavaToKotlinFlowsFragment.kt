@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.rcosteira.core.ui.BaseFragment
 
-
 class RxJavaToKotlinFlowsFragment : BaseFragment() {
 
     private lateinit var viewModel: RxJavaToKotlinFlowsViewModel
