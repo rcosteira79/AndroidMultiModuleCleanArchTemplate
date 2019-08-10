@@ -8,8 +8,8 @@ import javax.inject.Inject
 class DisplayedUserMapper @Inject constructor() : Mapper<User, DisplayedUser> {
     override fun mapToUI(type: User): DisplayedUser {
         return DisplayedUser(
-            id = type.id,
-            name = type.name
+            id = type.id.value,
+            name = type.username.value
         )
     }
 }

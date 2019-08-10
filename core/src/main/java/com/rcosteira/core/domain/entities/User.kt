@@ -1,7 +1,9 @@
 package com.rcosteira.core.domain.entities
 
+import com.rcosteira.core.domain.Id
+import com.rcosteira.core.domain.Username
+
 data class User(
-    val id: Int = -1,
-    val name: String = "",
-    val avatarUrl: String = ""
+    val id: Id,
+    val username: Username
 )

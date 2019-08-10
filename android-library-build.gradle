@@ -31,6 +31,10 @@ android {
         }
     }
 
+    androidExtensions {
+        experimental = true
+    }
+
     dataBinding {
         enabled = true
     }
@@ -39,6 +43,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions.freeCompilerArgs = ["-XXLanguage:+InlineClasses", "-Xskip-metadata-version-check"]
 }
 
 dependencies {
@@ -49,4 +55,3 @@ dependencies {
     kapt Libraries.daggerCompiler
     kapt Libraries.daggerAndroidProcessor
 }
-

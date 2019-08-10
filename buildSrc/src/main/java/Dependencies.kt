@@ -7,18 +7,18 @@ object Modules {
 
 object Versions {
     // Plugins
-    const val androidGradlePlugin = "3.5.0-rc01"
-    const val gradleVersionsPlugin = "0.21.0"
+    const val androidGradlePlugin = "3.5.0-rc03"
+    const val gradleVersionsPlugin = "0.22.0"
 
     // Kotlin
     const val kotlin = "1.3.41"
-    const val coroutines = "1.3.0-RC"
+    const val coroutines = "1.3.0-RC2"
 
     // Android libraries
     const val support = "1.1.0-rc01"
     const val supportAnnotations = "1.1.0"
-    const val coreKtx = "1.2.0-alpha02"
-    const val materialDesign = "1.1.0-alpha08"
+    const val coreKtx = "1.2.0-alpha03"
+    const val materialDesign = "1.1.0-alpha09"
     const val constraintLayout = "2.0.0-beta2"
     const val room = "2.1.0-beta01"
     const val navigation = "1.0.0"
@@ -38,17 +38,18 @@ object Versions {
     const val firebaseCore = "17.0.1"
     const val crashlytics = "2.10.1"
     const val googleServices = "4.3.0"
-    const val leakCanary = "2.0-alpha-3"
+    const val leakCanary = "2.0-beta-2"
 
     // Dependency injection
-    const val dagger = "2.23.2"
+    const val dagger = "2.24"
 
     // Network
-    const val retrofit = "2.6.0"
+    const val retrofit = "2.6.1"
     const val okHttp = "4.0.1"
 
     // Rx
-    const val rxjava = "2.2.10"
+    const val rxjava = "2.2.11"
+    const val rxAndroid = "2.1.1"
 }
 
 object Android {
@@ -90,6 +91,7 @@ object Libraries {
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
     const val okHttpLoggingInterceptor =
         "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+    const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
     const val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxjava}"
 }
 

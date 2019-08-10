@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rcosteira.core.domain.entities.User
 import com.rcosteira.core.exception.Failure
-import com.rcosteira.core.interactors.UseCase
+import com.rcosteira.core.interactors.UseCase.None
 import com.rcosteira.core.ui.BaseViewModel
 import com.rcosteira.recyclerviewexample.domain.usecases.GetUsers
 import com.rcosteira.recyclerviewexample.presentation.RecyclerViewExampleEvents.GetUsersEvent
@@ -23,7 +23,7 @@ class RecyclerViewExampleViewModel @Inject constructor(
     private val _viewState: MutableLiveData<RecyclerViewExampleViewState> = MutableLiveData()
 
     init {
-        _viewState.value = RecyclerViewExampleViewState()
+        _viewState.value = RecyclerViewExampleViewState(isLoading = true)
         getUsers()
     }
 
@@ -61,7 +61,7 @@ class RecyclerViewExampleViewModel @Inject constructor(
     }
 
     // Not caching on purpose. For a caching example, see the rxjavatokotlinflows module
-    private fun getUsers() = getUsers(uiScope, UseCase.None()) {
+    private fun getUsers() = getUsers(uiScope, None()) {
         it.either(
             ::handleFailure,
             ::handleUserList
@@ -69,11 +69,11 @@ class RecyclerViewExampleViewModel @Inject constructor(
     }
 
     private fun handleFailure(failure: Failure) {
-        _viewState.value = _viewState.value?.copy(loading = false, possibleFailure = failure)
+        _viewState.value = _viewState.value?.copy(isLoading = false, possibleFailure = failure)
     }
 
     private fun handleUserList(users: List<User>) {
         val usersToDisplay = users.map { displayedUserMapper.mapToUI(it) }
-        _viewState.value = _viewState.value?.copy(loading = false, userList = usersToDisplay)
+        _viewState.value = _viewState.value?.copy(isLoading = false, userList = usersToDisplay)
     }
 }

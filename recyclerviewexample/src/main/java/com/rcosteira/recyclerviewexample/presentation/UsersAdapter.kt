@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rcosteira.recyclerviewexample.R
 import com.rcosteira.recyclerviewexample.presentation.entities.DisplayedUser
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.recycler_view_item.view.*
+import kotlinx.android.synthetic.main.recycler_view_item.*
 
 class UsersAdapter constructor(
     private val rowClickListener: RecyclerViewRowClickListener<DisplayedUser>
@@ -38,8 +38,8 @@ class UsersAdapter constructor(
             get() = itemView
 
         fun bind(displayedUser: DisplayedUser, clickListener: RecyclerViewRowClickListener<DisplayedUser>) {
-            itemView.textViewUserName.text = displayedUser.name
-            itemView.checkboxUserSelected.isChecked = displayedUser.isChecked
+            textViewUserName.text = displayedUser.name
+            checkboxUserSelected.isChecked = displayedUser.isChecked
 
             setCheckBoxOnClickListener(displayedUser, clickListener)
             setRowOnClickListener(displayedUser, clickListener)
@@ -49,7 +49,7 @@ class UsersAdapter constructor(
             displayedUser: DisplayedUser,
             clickListener: RecyclerViewRowClickListener<DisplayedUser>
         ) {
-            itemView.checkboxUserSelected.setOnClickListener {
+            checkboxUserSelected.setOnClickListener {
                 onUserClicked(displayedUser, clickListener)
             }
         }
@@ -74,7 +74,7 @@ class UsersAdapter constructor(
         private fun changeCheckbox(displayedUser: DisplayedUser) {
             val checked = displayedUser.isChecked
             displayedUser.isChecked = !checked
-            itemView.checkboxUserSelected.isChecked = !checked
+            checkboxUserSelected.isChecked = !checked
         }
     }
 

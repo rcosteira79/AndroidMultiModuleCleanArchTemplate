@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/default_spacing">
+
+        <ImageView
+            android:id="@+id/imageViewAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="User avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <ImageView
+            android:id="@+id/imageViewLocation"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="@dimen/default_spacing"
+            android:contentDescription="Location icon"
+            android:src="@drawable/location_on_text_color_24dp"
+            app:layout_constraintStart_toStartOf="@id/imageViewUsername"
+            app:layout_constraintTop_toBottomOf="@id/imageViewUsername" />
+
+        <ImageView
+            android:id="@+id/imageViewUsername"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="@dimen/double_default_spacing"
+            android:layout_marginLeft="@dimen/double_default_spacing"
+            android:layout_marginTop="@dimen/default_spacing"
+            android:layout_marginEnd="@dimen/half_default_spacing"
+            android:layout_marginRight="@dimen/half_default_spacing"
+            android:contentDescription="Username icon"
+            android:src="@drawable/account_circle_text_color_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewName" />
+
+        <ImageView
+            android:id="@+id/imageViewEmail"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="@dimen/default_spacing"
+            android:layout_marginEnd="@dimen/half_default_spacing"
+            android:layout_marginRight="@dimen/half_default_spacing"
+            android:contentDescription="Email icon"
+            android:src="@drawable/email_text_color_24dp"
+            app:layout_constraintBottom_toBottomOf="@id/textViewEmail"
+            app:layout_constraintEnd_toStartOf="@id/textViewEmail" />
+
+        <TextView
+            android:id="@+id/textViewUsername"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/half_default_spacing"
+            android:layout_marginLeft="@dimen/half_default_spacing"
+            android:layout_marginTop="@dimen/default_spacing"
+            app:layout_constraintEnd_toStartOf="@+id/textViewEmail"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@id/imageViewUsername"
+            app:layout_constraintTop_toBottomOf="@id/textViewName"
+            tools:text="knowsNothing79" />
+
+        <TextView
+            android:id="@+id/textViewEmail"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/double_default_spacing"
+            android:layout_marginRight="@dimen/double_default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewUsername"
+            app:layout_constraintTop_toTopOf="@+id/textViewUsername"
+            tools:text="good_guy_jon@targaryens.com" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/double_default_spacing"
+            android:layout_marginLeft="@dimen/double_default_spacing"
+            android:layout_marginTop="@dimen/double_default_spacing"
+            android:fontFamily="@font/roboto_mono_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewAvatar"
+            tools:text="Jon Slow" />
+
+
+        <TextView
+            android:id="@+id/textViewLocation"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/half_default_spacing"
+            android:layout_marginLeft="@dimen/half_default_spacing"
+            android:layout_marginTop="@dimen/default_spacing"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewLocation"
+            app:layout_constraintStart_toEndOf="@id/imageViewLocation"
+            tools:text="Somewhere over the wall" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

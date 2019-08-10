@@ -1,4 +1,3 @@
 package com.rcosteira.core.domain
 
-class Email {
-}
+inline class Email(val value: String)

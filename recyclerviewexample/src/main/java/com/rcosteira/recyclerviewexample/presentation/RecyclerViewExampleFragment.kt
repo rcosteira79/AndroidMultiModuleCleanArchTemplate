@@ -51,7 +51,7 @@ class RecyclerViewExampleFragment : BaseFragment(), RecyclerViewRowClickListener
     }
 
     private fun renderViewState(state: RecyclerViewExampleViewState) {
-        renderProgressBar(state.loading)
+        renderProgressBar(state.isLoading)
         renderUserList(state.userList)
         renderButton(state.buttonLabel)
         renderPossibleFailure(state.possibleFailure)

@@ -25,15 +25,11 @@ class HomeActivity : DaggerAppCompatActivity() {
         setupBottomNavigationBar(navController)
     }
 
-    private fun setupActionBar(
-        navController: NavController,
-        appBarConfiguration: AppBarConfiguration
-    ) {
+    private fun setupActionBar(navController: NavController, appBarConfiguration: AppBarConfiguration) {
         toolbar.setupWithNavController(navController, appBarConfiguration)
     }
 
     private fun setupBottomNavigationBar(navController: NavController) {
         bottomNavigation.setupWithNavController(navController)
-
     }
 }

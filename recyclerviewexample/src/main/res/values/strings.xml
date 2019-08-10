@@ -1,5 +1,5 @@
 <resources>
     <string name="recycler_view_example_app_name">RecyclerView Example</string>
-    <string name="button_label_do_stuff_with_users">Do stuff with users%1$s</string>
+    <string name="button_label_do_stuff_with_users">Do stuff with detailedUsers%1$s</string>
     <string name="user_name">User name</string>
 </resources>

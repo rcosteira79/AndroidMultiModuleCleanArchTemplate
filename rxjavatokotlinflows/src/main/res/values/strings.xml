@@ -1,3 +1,7 @@
 <resources>
     <string name="rx_java_to_kotlin_flows_app_name">RxJava to Kotlin Flows</string>
+    <string name="username_search_label">Search for a username</string>
+    <string name="rv_item_name_label">Name:</string>
+    <string name="rv_item_email_label">Email:</string>
+    <string name="rv_item_location_label">Location:</string>
 </resources>

@@ -1,6 +1,6 @@
 package com.rcosteira.core.ui
 
-interface Mapper<in D, out V> {
+interface Mapper<in E, out V> {
 
-    fun mapToUI(type: D): V
+    fun mapToUI(type: E): V
 }

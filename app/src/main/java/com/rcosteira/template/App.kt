@@ -1,19 +1,18 @@
 package com.rcosteira.template
 
-import android.app.Activity
 import android.app.Application
 import com.rcosteira.core.Core
 import com.rcosteira.template.di.components.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
 // If More android injectors are needed, consider using DaggerApplication instead
-class App : Application(), HasActivityInjector {
+class App : Application(), HasAndroidInjector {
 
     @Inject
-    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     override fun onCreate() {
         super.onCreate()
@@ -29,7 +28,7 @@ class App : Application(), HasActivityInjector {
             .inject(this)
     }
 
-    override fun activityInjector(): AndroidInjector<Activity> {
-        return activityInjector
+    override fun androidInjector(): AndroidInjector<Any> {
+        return androidInjector
     }
 }

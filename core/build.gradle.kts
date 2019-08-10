@@ -22,6 +22,7 @@ dependencies {
     "api"(Libraries.okHttpLoggingInterceptor)
     "api"(Libraries.rxJava2Adapter)
 
+    "implementation"(Libraries.rxAndroid)
     "implementation"(Libraries.rxJava)
 
     "debugImplementation"(Libraries.leakCanary)

@@ -1,4 +1,4 @@
-package com.rcosteira.rxjavatokotlinflows
+package com.rcosteira.rxjavatokotlinflows.di
 
 import javax.inject.Scope
 

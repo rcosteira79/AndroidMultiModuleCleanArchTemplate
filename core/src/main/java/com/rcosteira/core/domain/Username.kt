@@ -1,3 +1,3 @@
 package com.rcosteira.core.domain
 
-inline class Name(val name: String)
+inline class Username(val value: String)

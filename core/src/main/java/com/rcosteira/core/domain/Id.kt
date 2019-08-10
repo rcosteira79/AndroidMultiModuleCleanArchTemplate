@@ -1,4 +1,3 @@
 package com.rcosteira.core.domain
 
-class Id {
-}
+inline class Id(val value: Long)
