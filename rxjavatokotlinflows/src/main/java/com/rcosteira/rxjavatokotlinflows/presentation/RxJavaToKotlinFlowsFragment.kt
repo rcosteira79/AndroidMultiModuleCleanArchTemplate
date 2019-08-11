@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.rcosteira.core.extensions.observe
 import com.rcosteira.core.ui.BaseFragment
 import com.rcosteira.rxjavatokotlinflows.R
@@ -35,7 +35,8 @@ class RxJavaToKotlinFlowsFragment : BaseFragment() {
 
     private fun setupRecyclerView() {
         prepareAdapter()
-        recyclerViewDetailedUsers.layoutManager = LinearLayoutManager(this.context)
+        val numberOfColumns = 2
+        recyclerViewDetailedUsers.layoutManager = GridLayoutManager(this.context, numberOfColumns)
         recyclerViewDetailedUsers.adapter = adapter
         recyclerViewDetailedUsers.setHasFixedSize(true)
     }

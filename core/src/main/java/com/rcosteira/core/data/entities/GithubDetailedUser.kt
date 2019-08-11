@@ -23,7 +23,7 @@ data class GithubDetailedUser(
     @field:Json(name = "site_admin") val isSiteAdmin: Boolean = false,
     @field:Json(name = "name") val name: String = "",
     @field:Json(name = "company") val company: String = "",
-    @field:Json(name = "blog") val blog: String = "",
+    @field:Json(name = "blog") val blog: String? = "",
     @field:Json(name = "location") val location: String? = "",
     @field:Json(name = "email") val email: String? = "",
     @field:Json(name = "hireable") val hireable: Boolean? = false,

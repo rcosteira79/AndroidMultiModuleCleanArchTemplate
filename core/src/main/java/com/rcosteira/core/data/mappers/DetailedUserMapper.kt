@@ -7,13 +7,15 @@ import com.rcosteira.core.domain.entities.DetailedUser
 import javax.inject.Inject
 
 class DetailedUserMapper @Inject constructor() : Mapper<DetailedUser, GithubDetailedUser> {
+    private val notApplicable = "N/A"
+
     override fun mapToEntity(type: GithubDetailedUser): DetailedUser {
         return DetailedUser(
             id = Id(type.id),
             username = Username(type.login),
             name = Name(type.name),
-            email = Email(type.email ?: ""),
-            location = Location(type.location ?: ""),
+            blog = Blog(type.blog ?: notApplicable),
+            location = Location(type.location ?: notApplicable),
             avatar = Avatar(type.avatarUrl)
         )
     }
@@ -23,7 +25,7 @@ class DetailedUserMapper @Inject constructor() : Mapper<DetailedUser, GithubDeta
             id = type.id.value,
             login = type.username.value,
             name = type.name.value,
-            email = type.email.value,
+            blog = type.blog.value,
             location = type.location.value,
             avatarUrl = type.avatar.value
         )

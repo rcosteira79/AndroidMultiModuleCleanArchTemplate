@@ -11,7 +11,7 @@ class DisplayedDetailedUserMapper @Inject constructor() : Mapper<DetailedUser, D
             id = type.id,
             username = type.username,
             name = type.name,
-            email = type.email,
+            blog = type.blog,
             location = type.location,
             avatar = type.avatar
         )

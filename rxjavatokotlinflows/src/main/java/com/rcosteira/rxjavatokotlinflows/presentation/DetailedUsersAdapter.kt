@@ -41,7 +41,7 @@ class DetailedUsersAdapter(
         fun bind(item: DisplayedDetailedUser, imageLoader: ImageLoader) {
             textViewName.text = item.name.value
             textViewUsername.text = item.username.value
-            textViewEmail.text = item.email.value
+            textViewBlog.text = item.blog.value
             textViewLocation.text = item.location.value
             imageLoader
                 .load(item.avatar.value)
@@ -63,7 +63,7 @@ class DetailedUsersAdapter(
         ): Boolean {
             return oldItem.id == newItem.id &&
                     oldItem.username == newItem.username &&
-                    oldItem.email == newItem.email &&
+                    oldItem.blog == newItem.blog &&
                     oldItem.location == newItem.location &&
                     oldItem.avatar == newItem.avatar
         }
