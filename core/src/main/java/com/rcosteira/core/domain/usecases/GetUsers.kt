@@ -1,4 +1,4 @@
-package com.rcosteira.recyclerviewexample.domain.usecases
+package com.rcosteira.core.domain.usecases
 
 import com.rcosteira.core.domain.entities.User
 import com.rcosteira.core.domain.repositories.Repository

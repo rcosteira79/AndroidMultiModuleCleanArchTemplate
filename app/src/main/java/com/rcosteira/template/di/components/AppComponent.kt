@@ -1,8 +1,6 @@
 package com.rcosteira.template.di.components
 
 import android.content.Context
-import com.rcosteira.core.di.modules.NetworkCommonModule
-import com.rcosteira.core.di.modules.PreferencesModule
 import com.rcosteira.core.di.modules.ViewModelFactoryModule
 import com.rcosteira.template.App
 import com.rcosteira.template.di.modules.HomeModule
@@ -16,8 +14,6 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         HomeModule::class,
-        PreferencesModule::class,
-        NetworkCommonModule::class,
         ViewModelFactoryModule::class
     ]
 )

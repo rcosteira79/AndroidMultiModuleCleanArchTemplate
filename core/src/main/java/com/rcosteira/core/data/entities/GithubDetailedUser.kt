@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 data class GithubDetailedUser(
     @field:Json(name = "login") val login: String = "",
-    @field:Json(name = "value") val id: Long = -1,
+    @field:Json(name = "id") val id: Long = -1,
     @field:Json(name = "node_id") val nodeId: String = "",
     @field:Json(name = "avatar_url") val avatarUrl: String = "",
     @field:Json(name = "gravatar_id") val gravatarId: String = "",
@@ -24,9 +24,9 @@ data class GithubDetailedUser(
     @field:Json(name = "name") val name: String = "",
     @field:Json(name = "company") val company: String = "",
     @field:Json(name = "blog") val blog: String = "",
-    @field:Json(name = "location") val location: String = "",
-    @field:Json(name = "email") val email: String = "",
-    @field:Json(name = "hireable") val hireable: Boolean = false,
+    @field:Json(name = "location") val location: String? = "",
+    @field:Json(name = "email") val email: String? = "",
+    @field:Json(name = "hireable") val hireable: Boolean? = false,
     @field:Json(name = "bio") val bio: String = "",
     @field:Json(name = "public_repos") val publicRepos: Long = 0,
     @field:Json(name = "public_gists") val publicGists: Long = 0,

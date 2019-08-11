@@ -2,15 +2,14 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.MaterialComponents.CardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="3dp"
-    app:cardElevation="2dp">
+    android:layout_margin="@dimen/default_spacing">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/default_spacing">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imageViewAvatar"
@@ -28,8 +27,10 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginTop="@dimen/default_spacing"
+            android:layout_marginBottom="8dp"
             android:contentDescription="Location icon"
             android:src="@drawable/location_on_text_color_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/imageViewUsername"
             app:layout_constraintTop_toBottomOf="@id/imageViewUsername" />
 
@@ -51,13 +52,12 @@
             android:id="@+id/imageViewEmail"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:layout_marginTop="@dimen/default_spacing"
-            android:layout_marginEnd="@dimen/half_default_spacing"
-            android:layout_marginRight="@dimen/half_default_spacing"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:contentDescription="Email icon"
             android:src="@drawable/email_text_color_24dp"
             app:layout_constraintBottom_toBottomOf="@id/textViewEmail"
-            app:layout_constraintEnd_toStartOf="@id/textViewEmail" />
+            app:layout_constraintStart_toStartOf="@+id/guideline" />
 
         <TextView
             android:id="@+id/textViewUsername"
@@ -67,7 +67,6 @@
             android:layout_marginStart="@dimen/half_default_spacing"
             android:layout_marginLeft="@dimen/half_default_spacing"
             android:layout_marginTop="@dimen/default_spacing"
-            app:layout_constraintEnd_toStartOf="@+id/textViewEmail"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toEndOf="@id/imageViewUsername"
             app:layout_constraintTop_toBottomOf="@id/textViewName"
@@ -78,10 +77,12 @@
             style="@style/TextAppearance.MaterialComponents.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/double_default_spacing"
-            android:layout_marginRight="@dimen/double_default_spacing"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textViewUsername"
+            app:layout_constraintStart_toEndOf="@+id/imageViewEmail"
             app:layout_constraintTop_toTopOf="@+id/textViewUsername"
             tools:text="good_guy_jon@targaryens.com" />
 
@@ -110,6 +111,13 @@
             app:layout_constraintBottom_toBottomOf="@id/imageViewLocation"
             app:layout_constraintStart_toEndOf="@id/imageViewLocation"
             tools:text="Somewhere over the wall" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

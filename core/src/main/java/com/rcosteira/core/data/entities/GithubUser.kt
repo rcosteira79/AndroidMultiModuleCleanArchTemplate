@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 data class GithubUser(
     @field:Json(name = "login") val login: String = "",
-    @field:Json(name = "value") val id: Long = -1,
+    @field:Json(name = "id") internal val id: Long = -1,
     @field:Json(name = "node_id") val nodeId: String = "",
     @field:Json(name = "avatar_url") val avatarUrl: String = "",
     @field:Json(name = "gravatar_id") val gravatarId: String = "",

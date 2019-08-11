@@ -4,7 +4,6 @@ import com.rcosteira.core.data.Mapper
 import com.rcosteira.core.data.entities.GithubDetailedUser
 import com.rcosteira.core.domain.*
 import com.rcosteira.core.domain.entities.DetailedUser
-import java.net.URL
 import javax.inject.Inject
 
 class DetailedUserMapper @Inject constructor() : Mapper<DetailedUser, GithubDetailedUser> {
@@ -13,9 +12,9 @@ class DetailedUserMapper @Inject constructor() : Mapper<DetailedUser, GithubDeta
             id = Id(type.id),
             username = Username(type.login),
             name = Name(type.name),
-            email = Email(type.email),
-            location = Location(type.location),
-            avatarUrl = URL(type.avatarUrl)
+            email = Email(type.email ?: ""),
+            location = Location(type.location ?: ""),
+            avatar = Avatar(type.avatarUrl)
         )
     }
 
@@ -26,7 +25,7 @@ class DetailedUserMapper @Inject constructor() : Mapper<DetailedUser, GithubDeta
             name = type.name.value,
             email = type.email.value,
             location = type.location.value,
-            avatarUrl = type.avatarUrl.readText()
+            avatarUrl = type.avatar.value
         )
     }
 }

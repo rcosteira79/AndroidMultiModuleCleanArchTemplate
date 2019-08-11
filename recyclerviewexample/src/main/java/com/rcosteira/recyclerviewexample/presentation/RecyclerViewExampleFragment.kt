@@ -12,13 +12,10 @@ import com.rcosteira.recyclerviewexample.R
 import com.rcosteira.recyclerviewexample.presentation.RecyclerViewExampleEvents.ItemWasCheckboxedEvent
 import com.rcosteira.recyclerviewexample.presentation.entities.DisplayedUser
 import kotlinx.android.synthetic.main.fragment_recycler_view_example.*
-import javax.inject.Inject
 
 class RecyclerViewExampleFragment : BaseFragment(), RecyclerViewRowClickListener<DisplayedUser> {
 
-    @Inject
-    lateinit var viewModel: RecyclerViewExampleViewModel
-
+    private lateinit var viewModel: RecyclerViewExampleViewModel
     private lateinit var adapter: UsersAdapter
 
     override fun onCreateView(

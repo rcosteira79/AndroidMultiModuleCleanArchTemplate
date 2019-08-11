@@ -10,15 +10,18 @@ import com.rcosteira.rxjavatokotlinflows.R
 import com.rcosteira.rxjavatokotlinflows.presentation.DetailedUsersAdapter.DisplayedDetailedUserViewHolder
 import com.rcosteira.rxjavatokotlinflows.presentation.entities.DisplayedDetailedUser
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.recycler_view_item.*
+import kotlinx.android.synthetic.main.rx_flows_recycler_view_item.*
 
-class DetailedUsersAdapter : ListAdapter<DisplayedDetailedUser, DisplayedDetailedUserViewHolder>(DiffCallback()) {
+class DetailedUsersAdapter(
+    private val imageLoader: ImageLoader
+) : ListAdapter<DisplayedDetailedUser, DisplayedDetailedUserViewHolder>(DiffCallback()) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisplayedDetailedUserViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
         return DisplayedDetailedUserViewHolder(
             inflater.inflate(
-                R.layout.recycler_view_item,
+                R.layout.rx_flows_recycler_view_item,
                 parent,
                 false
             )
@@ -27,20 +30,22 @@ class DetailedUsersAdapter : ListAdapter<DisplayedDetailedUser, DisplayedDetaile
 
     override fun onBindViewHolder(holder: DisplayedDetailedUserViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, imageLoader)
     }
 
-
     class DisplayedDetailedUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), LayoutContainer {
+
         override val containerView: View?
             get() = itemView
 
-        fun bind(item: DisplayedDetailedUser) {
+        fun bind(item: DisplayedDetailedUser, imageLoader: ImageLoader) {
             textViewName.text = item.name.value
             textViewUsername.text = item.username.value
             textViewEmail.text = item.email.value
             textViewLocation.text = item.location.value
-
+            imageLoader
+                .load(item.avatar.value)
+                .into(imageViewAvatar)
         }
     }
 
@@ -60,7 +65,7 @@ class DetailedUsersAdapter : ListAdapter<DisplayedDetailedUser, DisplayedDetaile
                     oldItem.username == newItem.username &&
                     oldItem.email == newItem.email &&
                     oldItem.location == newItem.location &&
-                    oldItem.picture == newItem.picture
+                    oldItem.avatar == newItem.avatar
         }
     }
 }

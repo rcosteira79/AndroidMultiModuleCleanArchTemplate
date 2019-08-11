@@ -4,17 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eeeeee"
     android:padding="@dimen/default_spacing"
     tools:context=".presentation.RxJavaToKotlinFlowsFragment">
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progressBarLoading"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewDetailedUsers"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/textInputSearch"
         android:layout_marginTop="@dimen/default_spacing"
         android:requiresFadingEdge="vertical"
-        tools:listitem="@layout/recycler_view_item" />
+        tools:listitem="@layout/rx_flows_recycler_view_item" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputSearch"
@@ -29,11 +37,4 @@
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/progressBarLoading"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
 </RelativeLayout>

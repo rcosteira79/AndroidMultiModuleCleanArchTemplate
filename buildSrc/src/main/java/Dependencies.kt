@@ -50,11 +50,14 @@ object Versions {
     // Rx
     const val rxjava = "2.2.11"
     const val rxAndroid = "2.1.1"
+
+    // Image loading
+    const val glide = "4.9.0"
 }
 
 object Android {
     const val applicationId = "com.rcosteira.template"
-    const val minSDK = 16
+    const val minSDK = 21
     const val compileSDK = 28
     const val targetSDK = 28
     const val appVersionCode = 1
@@ -93,6 +96,9 @@ object Libraries {
         "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
     const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
     const val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxjava}"
+
+    // Image loading
+    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
 }
 
 object AndroidLibraries {

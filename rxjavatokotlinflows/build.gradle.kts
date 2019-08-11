@@ -7,5 +7,7 @@ dependencies {
 
     "implementation"(Libraries.rxJava)
     "implementation"(Libraries.rxAndroid)
+    "implementation"(Libraries.glide)
+
     "implementation"(AndroidLibraries.constraintLayout)
 }

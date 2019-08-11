@@ -1,5 +1,6 @@
 package com.rcosteira.core.di.modules
 
+import com.rcosteira.core.di.scopes.ActivityScope
 import com.rcosteira.logging.Logger
 import dagger.Module
 import dagger.Provides
@@ -9,23 +10,5 @@ import okhttp3.logging.HttpLoggingInterceptor
 @Module
 class NetworkCommonModule {
 
-    @Provides
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(httpLoggingInterceptor)
-            .build()
-    }
 
-    @Provides
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        val interceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-            override fun log(message: String) {
-                Logger.i(message)
-            }
-        })
-
-        interceptor.level = HttpLoggingInterceptor.Level.BASIC
-
-        return interceptor
-    }
 }

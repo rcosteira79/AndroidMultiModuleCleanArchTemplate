@@ -10,13 +10,10 @@ import com.rcosteira.core.ui.BaseFragment
 import com.rcosteira.rxjavatokotlinflows.R
 import com.rcosteira.rxjavatokotlinflows.presentation.entities.DisplayedDetailedUser
 import kotlinx.android.synthetic.main.fragment_rx_java_to_kotlin_flows.*
-import javax.inject.Inject
 
 class RxJavaToKotlinFlowsFragment : BaseFragment() {
 
-    @Inject
     private lateinit var viewModel: RxJavaToKotlinFlowsViewModel
-
     private lateinit var adapter: DetailedUsersAdapter
 
     override fun onCreateView(
@@ -44,7 +41,8 @@ class RxJavaToKotlinFlowsFragment : BaseFragment() {
     }
 
     private fun prepareAdapter() {
-        adapter = DetailedUsersAdapter()
+        val imageLoader = ImageLoader(this)
+        adapter = DetailedUsersAdapter(imageLoader)
     }
 
     private fun renderViewState(state: RxJavaToKotlinFlowsViewState) {
@@ -61,7 +59,6 @@ class RxJavaToKotlinFlowsFragment : BaseFragment() {
     }
 
     private fun renderDetailedUserList(detailedUsers: List<DisplayedDetailedUser>) {
-
+        adapter.submitList(detailedUsers)
     }
-
 }
