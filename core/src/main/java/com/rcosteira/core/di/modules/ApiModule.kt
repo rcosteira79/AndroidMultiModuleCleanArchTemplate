@@ -4,6 +4,7 @@ import com.rcosteira.core.data.api.Api
 import com.rcosteira.core.data.api.GithubApi
 import com.rcosteira.core.di.scopes.ActivityScope
 import com.rcosteira.logging.Logger
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -13,43 +14,49 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module
-class ApiModule {
+abstract class ApiModule {
 
-
-    @Provides
+    @Binds
     @ActivityScope
-    fun provideApi(githubApi: GithubApi): Api = githubApi
+    abstract fun provideApi(githubApi: GithubApi): Api
 
-    @Provides
-    @ActivityScope
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://api.github.com")
-            .client(okHttpClient)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(MoshiConverterFactory.create())
-            .build()
-    }
+    @Module
+    companion object {
 
-    @Provides
-    @ActivityScope
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(httpLoggingInterceptor)
-            .build()
-    }
+        @Provides
+        @JvmStatic
+        @ActivityScope
+        fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+            return Retrofit.Builder()
+                .baseUrl("https://api.github.com")
+                .client(okHttpClient)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create())
+                .build()
+        }
 
-    @Provides
-    @ActivityScope
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        val interceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-            override fun log(message: String) {
-                Logger.i(message)
-            }
-        })
+        @Provides
+        @JvmStatic
+        @ActivityScope
+        fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+            return OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
+                .build()
+        }
 
-        interceptor.level = HttpLoggingInterceptor.Level.BASIC
+        @Provides
+        @JvmStatic
+        @ActivityScope
+        fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+            val interceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+                override fun log(message: String) {
+                    Logger.i(message)
+                }
+            })
 
-        return interceptor
+            interceptor.level = HttpLoggingInterceptor.Level.BASIC
+
+            return interceptor
+        }
     }
 }

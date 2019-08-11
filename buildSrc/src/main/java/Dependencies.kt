@@ -20,7 +20,7 @@ object Versions {
     const val coreKtx = "1.2.0-alpha03"
     const val materialDesign = "1.1.0-alpha09"
     const val constraintLayout = "2.0.0-beta2"
-    const val room = "2.1.0-beta01"
+    const val room = "2.1.0"
     const val navigation = "1.0.0"
     const val dataBinding = "3.2.1"
     const val recyclerView = "1.1.0-beta01"
@@ -112,7 +112,8 @@ object AndroidLibraries {
     const val supportAnnotations = "androidx.annotation:annotation:${Versions.supportAnnotations}"
     const val room = "androidx.room:room-runtime:${Versions.room}"
     const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
-    const val roomCoroutines = "androidx.room:room-coroutines:${Versions.room}"
+    const val roomCoroutines = "androidx.room:room-ktx:${Versions.room}"
+    const val roomRxJava = "androidx.room:room-rxjava2:${Versions.room}"
     const val navigationCore =
         "android.arch.navigation:navigation-fragment-ktx:${Versions.navigation}"
     const val navigationUI = "android.arch.navigation:navigation-ui-ktx:${Versions.navigation}"

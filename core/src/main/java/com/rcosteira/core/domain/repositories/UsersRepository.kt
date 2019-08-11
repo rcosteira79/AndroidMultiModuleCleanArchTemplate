@@ -7,7 +7,7 @@ import com.rcosteira.core.exception.Failure
 import com.rcosteira.core.functional.Either
 import io.reactivex.Single
 
-interface Repository {
+interface UsersRepository {
     suspend fun getUsers(): Either<Failure, List<User>>
     suspend fun getUserDetails(username: Username): Either<Failure, DetailedUser>
 

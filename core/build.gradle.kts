@@ -12,6 +12,10 @@ dependencies {
     "api"(AndroidLibraries.navigationUI)
     "implementation"(AndroidLibraries.lifecycleExtensions)
 
+    "api"(AndroidLibraries.room)
+    "kapt"(AndroidLibraries.roomCompiler)
+    "api"(AndroidLibraries.roomCoroutines)
+    "api"(AndroidLibraries.roomRxJava)
 
     //"implementation"(Libraries.firebaseCore)
     //"implementation"(Libraries.crashlytics)

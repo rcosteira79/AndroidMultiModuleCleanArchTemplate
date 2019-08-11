@@ -3,14 +3,13 @@ package com.rcosteira.core.di.modules
 import com.rcosteira.core.data.preferences.Preferences
 import com.rcosteira.core.data.preferences.PreferencesImpl
 import com.rcosteira.core.di.scopes.ActivityScope
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 
 @Module
-class PreferencesModule {
+abstract class PreferencesModule {
 
-
-    @Provides
+    @Binds
     @ActivityScope
-    fun providePreferences(preferencesImpl: PreferencesImpl): Preferences = preferencesImpl
+    abstract fun providePreferences(preferencesImpl: PreferencesImpl): Preferences
 }

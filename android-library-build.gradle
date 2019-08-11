@@ -12,11 +12,15 @@ android {
         versionCode Android.appVersionCode
         versionName Android.appVersionName
 
-        /*javaCompileOptions {
+        javaCompileOptions {
             annotationProcessorOptions {
-                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+                arguments = [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"
+                ]
             }
-        }*/
+        }
     }
 
     buildTypes {

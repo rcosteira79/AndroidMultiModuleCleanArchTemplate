@@ -1,13 +1,14 @@
 package com.rcosteira.core.data
 
 import com.rcosteira.core.data.api.Api
+import com.rcosteira.core.data.cache.Cache
 import com.rcosteira.core.data.mappers.DetailedUserMapper
 import com.rcosteira.core.data.mappers.UserMapper
 import com.rcosteira.core.domain.SharedFailures.NoUsers
 import com.rcosteira.core.domain.Username
 import com.rcosteira.core.domain.entities.DetailedUser
 import com.rcosteira.core.domain.entities.User
-import com.rcosteira.core.domain.repositories.Repository
+import com.rcosteira.core.domain.repositories.UsersRepository
 import com.rcosteira.core.exception.Failure
 import com.rcosteira.core.functional.Either
 import com.rcosteira.core.functional.Either.Left
@@ -15,11 +16,12 @@ import com.rcosteira.core.functional.Either.Right
 import io.reactivex.Single
 import javax.inject.Inject
 
-class GithubRepository @Inject constructor(
+class GithubUsersRepository @Inject constructor(
     private val api: Api,
+    private val cache: Cache,
     private val userMapper: UserMapper,
     private val detailedUserMapper: DetailedUserMapper
-) : Repository {
+) : UsersRepository {
 
     override suspend fun getUsers(): Either<Failure, List<User>> {
         val users = api.getAllUsers()
