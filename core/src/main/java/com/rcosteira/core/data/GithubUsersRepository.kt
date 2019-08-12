@@ -67,7 +67,7 @@ class GithubUsersRepository @Inject constructor(
     override fun rxGetCachedUsers(): Flowable<List<DetailedUser>> {
         return cache.rxGetAllUsers()
             .distinctUntilChanged()
-            //.flatMapIterable { it }
+            .filter { it.isNotEmpty() }
             .map { detailedUsers ->
                 detailedUsers.map { detailedUserMapper.mapToEntity(it) }
             }
