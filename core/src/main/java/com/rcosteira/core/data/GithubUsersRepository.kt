@@ -10,6 +10,7 @@ import com.rcosteira.core.domain.entities.DetailedUser
 import com.rcosteira.core.domain.entities.User
 import com.rcosteira.core.domain.repositories.UsersRepository
 import com.rcosteira.core.exception.Failure
+import com.rcosteira.core.extensions.mapListElements
 import com.rcosteira.core.functional.Either
 import com.rcosteira.core.functional.Either.Left
 import com.rcosteira.core.functional.Either.Right
@@ -68,9 +69,7 @@ class GithubUsersRepository @Inject constructor(
         return cache.rxGetAllUsers()
             .distinctUntilChanged()
             .filter { it.isNotEmpty() }
-            .map { detailedUsers ->
-                detailedUsers.map { detailedUserMapper.mapToEntity(it) }
-            }
+            .mapListElements { detailedUserMapper.mapToEntity(it) } // extension function
     }
 
     override fun updateCachedUsers(users: List<DetailedUser>) {

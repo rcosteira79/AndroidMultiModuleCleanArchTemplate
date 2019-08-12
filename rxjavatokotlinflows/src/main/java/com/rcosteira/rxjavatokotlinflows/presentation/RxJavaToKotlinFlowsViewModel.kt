@@ -3,6 +3,7 @@ package com.rcosteira.rxjavatokotlinflows.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rcosteira.core.domain.usecases.GetUsers
+import com.rcosteira.core.extensions.mapListElements
 import com.rcosteira.core.interactors.UseCase.None
 import com.rcosteira.core.ui.BaseViewModel
 import com.rcosteira.logging.Logger
@@ -40,9 +41,7 @@ class RxJavaToKotlinFlowsViewModel @Inject constructor(
     private fun getUsersWithRx() {
         rxGetCachedUsers(params = None())
             .doOnNext { Logger.d("Database was updated. Will emit UI update.") }
-            .map { detailedUsers ->
-                detailedUsers.map { displayedDetailedUserMapper.mapToUI(it) }
-            }
+            .mapListElements { displayedDetailedUserMapper.mapToUI(it) } // extension function
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
