@@ -1,14 +1,14 @@
 package com.rcosteira.rxjavatokotlinflows.domain.usecases
 
-import com.rcosteira.core.domain.entities.DetailedUser
 import com.rcosteira.core.domain.Username
+import com.rcosteira.core.domain.entities.DetailedUser
 import com.rcosteira.core.domain.repositories.UsersRepository
-import com.rcosteira.core.interactors.RxSingleUseCase
-import io.reactivex.Single
+import com.rcosteira.core.interactors.RxMaybeUseCase
+import io.reactivex.Maybe
 import javax.inject.Inject
 
 class RxGetUserDetails @Inject constructor(
     private val usersRepository: UsersRepository
-) : RxSingleUseCase<DetailedUser, Username>() {
-    override fun run(params: Username): Single<DetailedUser> = usersRepository.rxGetUserDetails(params)
+) : RxMaybeUseCase<DetailedUser, Username>() {
+    override fun run(params: Username): Maybe<DetailedUser> = usersRepository.rxGetUserDetailsFromApi(params)
 }

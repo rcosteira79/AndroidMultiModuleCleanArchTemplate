@@ -9,5 +9,5 @@ import com.rcosteira.core.interactors.UseCase
 import javax.inject.Inject
 
 class GetUserDetails @Inject constructor(private val usersRepository: UsersRepository) : UseCase<DetailedUser, Username>() {
-    override suspend fun run(params: Username): Either<Failure, DetailedUser> = usersRepository.getUserDetails(params)
+    override suspend fun run(params: Username): Either<Failure, DetailedUser> = usersRepository.getUserDetailsFromApi(params)
 }

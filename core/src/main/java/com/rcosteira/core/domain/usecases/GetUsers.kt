@@ -8,5 +8,5 @@ import javax.inject.Inject
 
 class GetUsers @Inject constructor(private val usersRepository: UsersRepository) :
     UseCase<List<User>, None>() {
-    override suspend fun run(params: None) = usersRepository.getUsers()
+    override suspend fun run(params: None) = usersRepository.getUsersFromApi()
 }

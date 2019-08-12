@@ -1,8 +1,8 @@
 package com.rcosteira.core.data.api
 
-import com.rcosteira.core.data.entities.GithubUser
 import com.rcosteira.core.data.entities.GithubDetailedUser
-import io.reactivex.Single
+import com.rcosteira.core.data.entities.GithubUser
+import io.reactivex.Maybe
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -20,11 +20,11 @@ class GithubApi @Inject constructor(retrofit: Retrofit) : Api {
     }
 
     /****************************** RxJava calls ******************************/
-    override fun rxGetAllUsers(): Single<List<GithubUser>> {
+    override fun rxGetAllUsers(): Maybe<List<GithubUser>> {
         return api.rxGetAllUsers()
     }
 
-    override fun rxGetUserDetails(username: String): Single<GithubDetailedUser> {
+    override fun rxGetUserDetails(username: String): Maybe<GithubDetailedUser> {
         return api.rxGetUserDetails(username)
     }
 }

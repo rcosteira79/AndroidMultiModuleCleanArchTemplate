@@ -21,7 +21,6 @@
         android:layout_height="match_parent"
         android:layout_below="@id/textInputSearch"
         android:layout_marginTop="@dimen/default_spacing"
-        android:requiresFadingEdge="vertical"
         tools:listitem="@layout/rx_flows_recycler_view_item" />
 
     <com.google.android.material.textfield.TextInputLayout

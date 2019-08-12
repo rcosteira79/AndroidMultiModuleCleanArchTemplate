@@ -1,18 +1,17 @@
 package com.rcosteira.core.data.cache
 
 import com.rcosteira.core.data.entities.GithubDetailedUser
-import com.rcosteira.core.data.entities.GithubUser
+import io.reactivex.Flowable
 import io.reactivex.Single
 
 interface Cache {
 
     /****************************** Coroutine calls ******************************/
-    suspend fun getAllUsers(): List<GithubUser>
-
-    suspend fun getUserDetails(username: String): GithubDetailedUser
+    suspend fun getAllUsers(): List<GithubDetailedUser>
 
     /****************************** RxJava calls ******************************/
-    fun rxGetAllUsers(): Single<List<GithubUser>>
+    fun rxGetAllUsers(): Flowable<List<GithubDetailedUser>>
 
-    fun rxGetUserDetails(username: String): Single<GithubDetailedUser>
+    /****************************** Common calls ******************************/
+    fun updateCachedUsers(users: List<GithubDetailedUser>)
 }

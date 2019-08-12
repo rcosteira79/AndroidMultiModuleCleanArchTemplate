@@ -1,8 +1,8 @@
 package com.rcosteira.core.data.api
 
-import com.rcosteira.core.data.entities.GithubUser
 import com.rcosteira.core.data.entities.GithubDetailedUser
-import io.reactivex.Single
+import com.rcosteira.core.data.entities.GithubUser
+import io.reactivex.Maybe
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -16,8 +16,8 @@ interface Api {
 
     /****************************** RxJava calls ******************************/
     @GET("users")
-    fun rxGetAllUsers(): Single<List<GithubUser>>
+    fun rxGetAllUsers(): Maybe<List<GithubUser>>
 
     @GET("users/{username}")
-    fun rxGetUserDetails(@Path("username") username: String): Single<GithubDetailedUser>
+    fun rxGetUserDetails(@Path("username") username: String): Maybe<GithubDetailedUser>
 }

@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.rcosteira.core.data.cache.Cache
 import com.rcosteira.core.data.cache.GithubDatabase
 import com.rcosteira.core.data.cache.RoomCache
+import com.rcosteira.core.data.cache.daos.UsersDao
 import com.rcosteira.core.di.scopes.ActivityScope
 import dagger.Binds
 import dagger.Module
@@ -23,15 +24,14 @@ abstract class CacheModule {
         @Provides
         @JvmStatic
         @ActivityScope
-        fun provideDatabase(context: Context): GithubDatabase {
-            return Room.databaseBuilder(context, GithubDatabase::class.java, "users.db")
+        fun provideDatabase(context: Context): GithubDatabase =
+            Room.databaseBuilder(context, GithubDatabase::class.java, "users.db")
                 .build()
-        }
 
         @Provides
         @JvmStatic
         @ActivityScope
-        fun provideUsersDao(githubDatabase: GithubDatabase) = githubDatabase.usersDao()
+        fun provideUsersDao(githubDatabase: GithubDatabase): UsersDao = githubDatabase.usersDao()
     }
 
 }

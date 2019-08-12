@@ -13,7 +13,9 @@ import com.rcosteira.core.exception.Failure
 import com.rcosteira.core.functional.Either
 import com.rcosteira.core.functional.Either.Left
 import com.rcosteira.core.functional.Either.Right
-import io.reactivex.Single
+import io.reactivex.Flowable
+import io.reactivex.Maybe
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class GithubUsersRepository @Inject constructor(
@@ -23,7 +25,7 @@ class GithubUsersRepository @Inject constructor(
     private val detailedUserMapper: DetailedUserMapper
 ) : UsersRepository {
 
-    override suspend fun getUsers(): Either<Failure, List<User>> {
+    override suspend fun getUsersFromApi(): Either<Failure, List<User>> {
         val users = api.getAllUsers()
 
         if (users.isEmpty()) {
@@ -33,25 +35,45 @@ class GithubUsersRepository @Inject constructor(
         return Right(users.map { userMapper.mapToEntity(it) })
     }
 
-    override suspend fun getUserDetails(username: Username): Either<Failure, DetailedUser> {
+    override suspend fun getUserDetailsFromApi(username: Username): Either<Failure, DetailedUser> {
         val detailedUser = api.getUserDetails(username.value)
         return Right(detailedUserMapper.mapToEntity(detailedUser));
     }
 
+    override suspend fun getCachedUsers(): Either<Failure, List<DetailedUser>> {
+        val users = cache.getAllUsers()
+
+        if (users.isEmpty()) {
+            return Left(NoUsers())
+        }
+
+        return Right(users.map { detailedUserMapper.mapToEntity(it) })
+    }
+
     // This Either<L,R> shenanigan really doesn't work that well with RxJava... Data related failures will already be
     // considered through the onError call of the subscriber. Would probably be able to return a Left here only if
-    // some failure regarding the connection occurred or something.
-    override fun rxGetUsers(): Single<List<User>> {
-        return api.rxGetAllUsers()
-            .map { githubUser ->
-                githubUser.map { userMapper.mapToEntity(it) }
+    // some failure regarding the connection occurred or something, before even performing the api call.
+    override fun rxGetUsersFromApi(): Observable<User> {
+        return api.rxGetAllUsers() // we use Maybe for semantic purposes - we only get one response on each api request.
+            .flattenAsObservable { it } // However, transformations are easier with Observables :)
+            .map { userMapper.mapToEntity(it) }
+    }
+
+    override fun rxGetUserDetailsFromApi(username: Username): Maybe<DetailedUser> {
+        return api.rxGetUserDetails(username.value)
+            .map { detailedUserMapper.mapToEntity(it) }
+    }
+
+    override fun rxGetCachedUsers(): Flowable<List<DetailedUser>> {
+        return cache.rxGetAllUsers()
+            .distinctUntilChanged()
+            //.flatMapIterable { it }
+            .map { detailedUsers ->
+                detailedUsers.map { detailedUserMapper.mapToEntity(it) }
             }
     }
 
-    override fun rxGetUserDetails(username: Username): Single<DetailedUser> {
-        return api.rxGetUserDetails(username.value)
-            .map { githubUserDetails ->
-                detailedUserMapper.mapToEntity(githubUserDetails)
-            }
+    override fun updateCachedUsers(users: List<DetailedUser>) {
+        cache.updateCachedUsers(users.map { detailedUserMapper.mapFromEntity(it) })
     }
 }
