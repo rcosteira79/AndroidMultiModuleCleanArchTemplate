@@ -15,7 +15,7 @@ interface UsersDao {
     fun rxGetAllUsers(): Flowable<List<GithubDetailedUser>>
 
     /*
-    * These should be generic and go to a BaseDao interface in the case where we need more Daos.
+    * These should be generic and go to left BaseDao interface in the case where we need more Daos.
     * UsersDao would then be refactored to an abstract class and would implement said interface.
     */
     @Insert(onConflict = OnConflictStrategy.REPLACE)

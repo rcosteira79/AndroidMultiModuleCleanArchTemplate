@@ -20,7 +20,7 @@ object Versions {
     const val coreKtx = "1.2.0-alpha03"
     const val materialDesign = "1.1.0-alpha09"
     const val constraintLayout = "2.0.0-beta2"
-    const val room = "2.1.0"
+    const val room = "2.2.0-alpha02"
     const val navigation = "1.0.0"
     const val dataBinding = "3.2.1"
     const val recyclerView = "1.1.0-beta01"

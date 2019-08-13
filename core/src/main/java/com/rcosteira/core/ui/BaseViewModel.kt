@@ -9,11 +9,11 @@ import kotlinx.coroutines.cancelChildren
 open class BaseViewModel : ViewModel() {
 
     private val viewModelJob = SupervisorJob()
-    protected val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    protected val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
 
     override fun onCleared() {
         super.onCleared()
-        uiScope.coroutineContext.cancelChildren()
+        viewModelScope.coroutineContext.cancelChildren()
     }
 }

@@ -52,7 +52,7 @@ class GithubUsersRepository @Inject constructor(
     }
 
     // This Either<L,R> shenanigan really doesn't work that well with RxJava... Data related failures will already be
-    // considered through the onError call of the subscriber. Would probably be able to return a Left here only if
+    // considered through the onError call of the subscriber. Would probably be able to return left Left here only if
     // some failure regarding the connection occurred or something, before even performing the api call.
     override fun rxGetUsersFromApi(): Observable<User> {
         return api.rxGetAllUsers() // we use Maybe for semantic purposes - we only get one response on each api request.

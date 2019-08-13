@@ -2,9 +2,10 @@ package com.rcosteira.rxjavatokotlinflows.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.rcosteira.core.domain.usecases.GetUsers
+import com.rcosteira.core.exception.Failure
+import com.rcosteira.core.extensions.addTo
 import com.rcosteira.core.extensions.mapListElements
-import com.rcosteira.core.interactors.UseCase.None
+import com.rcosteira.core.interactors.CoroutineScopeUseCase.NoParameters
 import com.rcosteira.core.ui.BaseViewModel
 import com.rcosteira.logging.Logger
 import com.rcosteira.rxjavatokotlinflows.domain.usecases.*
@@ -12,13 +13,16 @@ import com.rcosteira.rxjavatokotlinflows.presentation.entities.DisplayedDetailed
 import com.rcosteira.rxjavatokotlinflows.presentation.mappers.DisplayedDetailedUserMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class RxJavaToKotlinFlowsViewModel @Inject constructor(
     private val getUsers: GetUsers,
     private val getUserDetails: GetUserDetails,
+    private val getCachedUsers: GetCachedUsers,
     private val rxGetUsersFromApi: RxGetUsersFromApi,
     private val updateCachedUsers: UpdateCachedUsers,
     private val rxGetUserDetails: RxGetUserDetails,
@@ -35,46 +39,67 @@ class RxJavaToKotlinFlowsViewModel @Inject constructor(
     init {
         _viewState.value = RxJavaToKotlinFlowsViewState(isLoading = true)
         getUsersWithRx()
-        updateCache()
+        updateCacheWithRx()
     }
 
     private fun getUsersWithRx() {
-        rxGetCachedUsers(params = None())
+        rxGetCachedUsers(NoParameters())
             .doOnNext { Logger.d("Database was updated. Will emit UI update.") }
-            .mapListElements { displayedDetailedUserMapper.mapToUI(it) } // extension function
+            .mapListElements { displayedDetailedUserMapper.mapToUI(it) } // Extension function
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { this.handleDetailedUsers(it) },
-                { this.handleFailure(it) }
+                { this.handleRxFailure(it) }
             )
-            .addTo(compositeDisposable)
+            .addTo(compositeDisposable) // Extension function
     }
 
     private fun handleDetailedUsers(detailedUsers: List<DisplayedDetailedUser>) {
         _viewState.value = RxJavaToKotlinFlowsViewState(isLoading = false, detailedUsers = detailedUsers)
     }
 
-    private fun updateCache() {
-        rxGetUsersFromApi(params = None())
-            .take(5) // Github API has a hourly call limit :D and 5 are enough for what we're doing
+    private fun updateCacheWithRx() {
+        rxGetUsersFromApi(NoParameters())
+            .take(5) // Github API has left hourly call limit :D and 5 are enough for what we're doing
             .flatMapMaybe { rxGetUserDetails(it.username) } // second api call with information from the first one
             .toList() // gather all stream events back into one list -> List<DisplayedDetailedUser>
             .doOnSuccess { Logger.d("Updating database") }
             .subscribeOn(Schedulers.io())
             .subscribe(
                 { updateCachedUsers(it) },
-                { this.handleFailure(it) }
+                { this.handleRxFailure(it) }
             )
-            .addTo(compositeDisposable)
+            .addTo(compositeDisposable) // Extension function
     }
 
-    private fun handleFailure(error: Throwable?) {
-        // TODO actually account for errors :D
+    private fun handleRxFailure(error: Throwable?) {
+        // might not even have the Failure classes if this was RxJava only, so I'm not even gonna bother :D
         Logger.e(error, "Error")
     }
+
+    /******************************** Coroutines ********************************/
+    private fun getUsersWithCoroutines() {
+
+        // we want the coroutine to be bounded to the ViewModel's lifecycle in order to publish the changes to the UI
+        viewModelScope.launch {
+
+            // But the request should go to the backgound
+            val usersOrFailure = withContext(Dispatchers.IO) {
+
+                // TODO on the repo, this should be a Flow in order to replace FLowable!
+                // getCachedUsers
+            }
+
+
+        }
+    }
+
+
+    private fun handleFailure(failure: Failure) {
+        _viewState.value = RxJavaToKotlinFlowsViewState(isLoading = false, possibleFailure = failure)
+    }
 }
 
-fun Disposable.addTo(compositeDisposable: CompositeDisposable) {
-    compositeDisposable.add(this)
-}
+
+

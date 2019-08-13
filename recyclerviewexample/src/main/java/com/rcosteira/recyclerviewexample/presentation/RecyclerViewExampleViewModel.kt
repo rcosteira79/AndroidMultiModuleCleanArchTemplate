@@ -3,9 +3,9 @@ package com.rcosteira.recyclerviewexample.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rcosteira.core.domain.entities.User
-import com.rcosteira.core.domain.usecases.GetUsers
+import com.rcosteira.recyclerviewexample.domain.usecases.GetUsers
 import com.rcosteira.core.exception.Failure
-import com.rcosteira.core.interactors.UseCase.None
+import com.rcosteira.core.interactors.CoroutineScopeUseCase.NoParameters
 import com.rcosteira.core.ui.BaseViewModel
 import com.rcosteira.recyclerviewexample.presentation.RecyclerViewExampleEvents.GetUsersEvent
 import com.rcosteira.recyclerviewexample.presentation.RecyclerViewExampleEvents.ItemWasCheckboxedEvent
@@ -60,8 +60,8 @@ class RecyclerViewExampleViewModel @Inject constructor(
         return if (numberOfSelectedUsers > 0) " ($numberOfSelectedUsers)" else ""
     }
 
-    // Not caching on purpose. For a caching example, see the rxjavatokotlinflows module
-    private fun getUsers() = getUsers(uiScope, params = None()) {
+    // Not caching on purpose. For left caching example, see the rxjavatokotlinflows module
+    private fun getUsers() = getUsers(viewModelScope, params = NoParameters()) {
         it.either(
             ::handleFailure,
             ::handleUserList
