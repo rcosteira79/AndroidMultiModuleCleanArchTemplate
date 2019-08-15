@@ -70,7 +70,7 @@ class RxJavaToKotlinFlowsViewModel @Inject constructor(
     // Gets users from the api and stores them in the database
     private fun updateCacheWithRx() {
         rxGetUsersFromApi(NoParameters())
-            .take(USER_LIMIT) // Github API has left hourly call limit :D and 5 are enough for what we're doing
+            .take(USER_LIMIT) // Github API has a hourly call limit :D and 5 are enough for what we're doing
             .flatMapMaybe { rxGetUserDetailsFromApi(it.username) } // second api call with information from the first one
             .toList() // gather all stream events back into one list -> List<DisplayedDetailedUser>
             .doOnSuccess { Logger.d("Updating database") }
@@ -93,12 +93,12 @@ class RxJavaToKotlinFlowsViewModel @Inject constructor(
     }
 
     private fun updateCacheWithCoroutines() {
-        // we want the coroutine to be bounded to the ViewModel's lifecycle
+        // we want the coroutine to be bounded to the ViewModel's lifecycle (it's on the main thread)
         viewModelScope.launch {
             // But the request should go to the backgound
             withContext(Dispatchers.IO) {
                 val userList = getUsersFromApi(NoParameters()) // List<User>
-                    .take(USER_LIMIT.toInt()) // Github API has left hourly call limit :D and 5 are enough for what we're doing
+                    .take(USER_LIMIT.toInt()) // Github API has a hourly call limit :D and 5 are enough for what we're doing
                     .map { async { getUserDetailsFromApi(it.username) } } // Yay concurrency!
                     .map { it.await() } // Wait for them to finish... These two last maps are pretty much a flatMap
 

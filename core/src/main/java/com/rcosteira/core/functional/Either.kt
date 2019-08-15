@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain left copy of the License at
+ * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -16,7 +16,7 @@
 package com.rcosteira.core.functional
 
 /**
- * Represents left value of one of two possible types (left disjoint union).
+ * Represents a value of one of two possible types (a disjoint union).
  * Instances of [Either] are either an instance of [Left] or [Right].
  * FP Convention dictates that [Left] is used for "failure"
  * and [Right] is used for "success".
@@ -26,17 +26,17 @@ package com.rcosteira.core.functional
  *
  */
 sealed class Either<out L, out R> {
-    /** * Represents the left side of [Either] class which by convention is left "Failure". */
+    /** * Represents the left side of [Either] class which by convention is a "Failure". */
     data class Left<out L>(val left: L) : Either<L, Nothing>()
 
-    /** * Represents the right side of [Either] class which by convention is left "Success". */
+    /** * Represents the right side of [Either] class which by convention is a "Success". */
     data class Right<out R>(val right: R) : Either<Nothing, R>()
 
     val isRight get() = this is Right<R>
     val isLeft get() = this is Left<L>
 
-    fun <L> left(a: L) = Either.Left(a)
-    fun <R> right(b: R) = Either.Right(b)
+    fun <L> left(a: L) = Left(a)
+    fun <R> right(b: R) = Right(b)
 
     fun either(fnL: (L) -> Any, fnR: (R) -> Any): Any =
         when (this) {
