@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.rcosteira.core.extensions.load
 import com.rcosteira.rxjavatokotlinflows.R
 import com.rcosteira.rxjavatokotlinflows.presentation.DetailedUsersAdapter.DisplayedDetailedUserViewHolder
 import com.rcosteira.rxjavatokotlinflows.presentation.entities.DisplayedDetailedUser
@@ -13,7 +14,6 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.rx_flows_recycler_view_item.*
 
 class DetailedUsersAdapter(
-    private val imageLoader: ImageLoader
 ) : ListAdapter<DisplayedDetailedUser, DisplayedDetailedUserViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisplayedDetailedUserViewHolder {
@@ -30,7 +30,7 @@ class DetailedUsersAdapter(
 
     override fun onBindViewHolder(holder: DisplayedDetailedUserViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, imageLoader)
+        holder.bind(item)
     }
 
     class DisplayedDetailedUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), LayoutContainer {
@@ -38,14 +38,13 @@ class DetailedUsersAdapter(
         override val containerView: View?
             get() = itemView
 
-        fun bind(item: DisplayedDetailedUser, imageLoader: ImageLoader) {
+        fun bind(item: DisplayedDetailedUser) {
             textViewName.text = item.name.value
             textViewUsername.text = item.username.value
             textViewBlog.text = item.blog.value
             textViewLocation.text = item.location.value
-            imageLoader
+            imageViewAvatar
                 .load(item.avatar.value)
-                .into(imageViewAvatar)
         }
     }
 

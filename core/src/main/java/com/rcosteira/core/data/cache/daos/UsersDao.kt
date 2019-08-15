@@ -3,13 +3,13 @@ package com.rcosteira.core.data.cache.daos
 import androidx.room.*
 import com.rcosteira.core.data.entities.GithubDetailedUser
 import io.reactivex.Flowable
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UsersDao {
 
     @Query("SELECT * from Users")
-    suspend fun getAllUsers(): List<GithubDetailedUser>
+    fun getAllUsers(): Flow<List<GithubDetailedUser>>
 
     @Query("SELECT * from Users")
     fun rxGetAllUsers(): Flowable<List<GithubDetailedUser>>

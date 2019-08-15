@@ -17,6 +17,8 @@ dependencies {
     "api"(AndroidLibraries.roomCoroutines)
     "api"(AndroidLibraries.roomRxJava)
 
+    "implementation"(Libraries.glide)
+
     //"implementation"(Libraries.firebaseCore)
     //"implementation"(Libraries.crashlytics)
 

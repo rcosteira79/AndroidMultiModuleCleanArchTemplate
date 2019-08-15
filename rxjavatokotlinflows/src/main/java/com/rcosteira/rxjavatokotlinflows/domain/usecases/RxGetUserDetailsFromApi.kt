@@ -7,7 +7,7 @@ import com.rcosteira.core.interactors.RxMaybeUseCase
 import io.reactivex.Maybe
 import javax.inject.Inject
 
-class RxGetUserDetails @Inject constructor(
+class RxGetUserDetailsFromApi @Inject constructor(
     private val usersRepository: UsersRepository
 ) : RxMaybeUseCase<DetailedUser, Username>() {
     override fun run(params: Username): Maybe<DetailedUser> = usersRepository.rxGetUserDetailsFromApi(params)

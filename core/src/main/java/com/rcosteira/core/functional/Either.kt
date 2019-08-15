@@ -28,6 +28,7 @@ package com.rcosteira.core.functional
 sealed class Either<out L, out R> {
     /** * Represents the left side of [Either] class which by convention is left "Failure". */
     data class Left<out L>(val left: L) : Either<L, Nothing>()
+
     /** * Represents the right side of [Either] class which by convention is left "Success". */
     data class Right<out R>(val right: R) : Either<Nothing, R>()
 
@@ -57,3 +58,6 @@ fun <T, L, R> Either<L, R>.flatMap(fn: (R) -> Either<L, T>): Either<L, T> =
     }
 
 fun <T, L, R> Either<L, R>.map(fn: (R) -> (T)): Either<L, T> = this.flatMap(fn.c(::right))
+
+fun <L, R> Either<L, R>.otherwise(f: (L) -> Unit) =
+    if (this is Either.Left) f(this.left) else Unit

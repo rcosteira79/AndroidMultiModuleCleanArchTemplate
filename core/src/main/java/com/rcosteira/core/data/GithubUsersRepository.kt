@@ -17,6 +17,8 @@ import com.rcosteira.core.functional.Either.Right
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class GithubUsersRepository @Inject constructor(
@@ -25,8 +27,8 @@ class GithubUsersRepository @Inject constructor(
     private val userMapper: UserMapper,
     private val detailedUserMapper: DetailedUserMapper
 ) : UsersRepository {
-
-    override suspend fun getUsersFromApi(): Either<Failure, List<User>> {
+    /*************************** Used in RecyclerViewExample module ***************************/
+    override suspend fun getUsers(): Either<Failure, List<User>> {
         val users = api.getAllUsers()
 
         if (users.isEmpty()) {
@@ -35,25 +37,27 @@ class GithubUsersRepository @Inject constructor(
 
         return Right(users.map { userMapper.mapToEntity(it) })
     }
+    /*************************** Used in RecyclerViewExample module ***************************/
 
-    override suspend fun getUserDetailsFromApi(username: Username): Either<Failure, DetailedUser> {
+
+    /*************************** Used in RxJavaToKotlinFlows module ***************************/
+    override suspend fun getUsersFromApi(): List<User> {
+        return api.getAllUsers()
+            .map { userMapper.mapToEntity(it) }
+    }
+
+    override suspend fun getUserDetailsFromApi(username: Username): DetailedUser {
         val detailedUser = api.getUserDetails(username.value)
-        return Right(detailedUserMapper.mapToEntity(detailedUser));
+        return detailedUserMapper.mapToEntity(detailedUser)
     }
 
-    override suspend fun getCachedUsers(): Either<Failure, List<DetailedUser>> {
-        val users = cache.getAllUsers()
-
-        if (users.isEmpty()) {
-            return Left(NoUsers())
-        }
-
-        return Right(users.map { detailedUserMapper.mapToEntity(it) })
+    override fun getCachedUsers(): Flow<List<DetailedUser>> {
+        return cache.getAllUsers()
+            .map { userList ->
+                userList.map { detailedUserMapper.mapToEntity(it) }
+            }
     }
 
-    // This Either<L,R> shenanigan really doesn't work that well with RxJava... Data related failures will already be
-    // considered through the onError call of the subscriber. Would probably be able to return left Left here only if
-    // some failure regarding the connection occurred or something, before even performing the api call.
     override fun rxGetUsersFromApi(): Observable<User> {
         return api.rxGetAllUsers() // we use Maybe for semantic purposes - we only get one response on each api request.
             .flattenAsObservable { it } // However, transformations are easier with Observables :)

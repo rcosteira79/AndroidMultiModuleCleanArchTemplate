@@ -8,11 +8,14 @@ import com.rcosteira.core.functional.Either
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
 
 interface UsersRepository {
-    suspend fun getUsersFromApi(): Either<Failure, List<User>>
-    suspend fun getUserDetailsFromApi(username: Username): Either<Failure, DetailedUser>
-    suspend fun getCachedUsers(): Either<Failure, List<DetailedUser>>
+    suspend fun getUsers(): Either<Failure, List<User>>
+
+    suspend fun getUsersFromApi(): List<User>
+    suspend fun getUserDetailsFromApi(username: Username): DetailedUser
+    fun getCachedUsers(): Flow<List<DetailedUser>>
 
     fun rxGetUsersFromApi(): Observable<User>
     fun rxGetUserDetailsFromApi(username: Username): Maybe<DetailedUser>

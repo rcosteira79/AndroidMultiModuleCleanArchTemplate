@@ -42,8 +42,7 @@ class RxJavaToKotlinFlowsFragment : BaseFragment() {
     }
 
     private fun prepareAdapter() {
-        val imageLoader = ImageLoader(this)
-        adapter = DetailedUsersAdapter(imageLoader)
+        adapter = DetailedUsersAdapter()
     }
 
     private fun renderViewState(state: RxJavaToKotlinFlowsViewState) {
