@@ -2,8 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/app"
-    app:startDestination="@id/rxJavaToKotlinFlows">
+    app:startDestination="@id/rxJavaToCoroutines">
 
     <include app:graph="@navigation/recyclerviewexample" />
-    <include app:graph="@navigation/rxjavatokotlinflows" />
+    <include app:graph="@navigation/rxjavatocoroutines" />
 </navigation>

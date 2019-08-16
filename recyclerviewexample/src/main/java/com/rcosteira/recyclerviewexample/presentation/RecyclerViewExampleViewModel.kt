@@ -60,7 +60,7 @@ class RecyclerViewExampleViewModel @Inject constructor(
         return if (numberOfSelectedUsers > 0) " ($numberOfSelectedUsers)" else ""
     }
 
-    // Not caching on purpose. For a caching example, see the rxjavatokotlinflows module
+    // Not caching on purpose. For a caching example, see the rxjavatocoroutines module
     private fun getUsers() = getUsers(viewModelScope, params = NoParameters()) {
         it.either(
             ::handleFailure,

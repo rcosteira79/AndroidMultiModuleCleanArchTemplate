@@ -2,7 +2,7 @@ object Modules {
     const val core = ":core"
     const val logging = ":logging"
     const val recyclerviewexample = ":recyclerviewexample"
-    const val rxjavatokotlinflows = ":rxjavatokotlinflows"
+    const val rxjavatokotlinflows = ":rxjavatocoroutines"
 }
 
 object Versions {

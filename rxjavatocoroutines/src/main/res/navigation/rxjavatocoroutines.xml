@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rxJavaToCoroutines"
+    app:startDestination="@id/rxJavaToCoroutinesFragment">
+
+    <fragment
+        android:id="@+id/rxJavaToCoroutinesFragment"
+        android:name="com.rcosteira.rxjavatocoroutines.presentation.RxJavaToCoroutinesFragment"
+        android:label="@string/rx_java_to_coroutines_app_name"
+        tools:layout="@layout/fragment_rx_java_to_coroutines" />
+</navigation>

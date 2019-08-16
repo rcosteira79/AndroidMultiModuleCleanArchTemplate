@@ -4,6 +4,7 @@ import com.rcosteira.core.data.api.Api
 import com.rcosteira.core.data.cache.Cache
 import com.rcosteira.core.data.mappers.DetailedUserMapper
 import com.rcosteira.core.data.mappers.UserMapper
+import com.rcosteira.core.domain.Id
 import com.rcosteira.core.domain.SharedFailures.NoUsers
 import com.rcosteira.core.domain.Username
 import com.rcosteira.core.domain.entities.DetailedUser
@@ -14,6 +15,7 @@ import com.rcosteira.core.extensions.mapListElements
 import com.rcosteira.core.functional.Either
 import com.rcosteira.core.functional.Either.Left
 import com.rcosteira.core.functional.Either.Right
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
@@ -59,7 +61,7 @@ class GithubUsersRepository @Inject constructor(
     }
 
     override fun rxGetUsersFromApi(): Observable<User> {
-        return api.rxGetAllUsers() // we use Maybe for semantic purposes - we only get one response on each api request.
+        return api.rxGetAllUsers() // Maybe for semantic purposes - one possible response on each request.
             .flattenAsObservable { it } // However, transformations are easier with Observables :)
             .map { userMapper.mapToEntity(it) }
     }
@@ -78,5 +80,9 @@ class GithubUsersRepository @Inject constructor(
 
     override fun updateCachedUsers(users: List<DetailedUser>) {
         cache.updateCachedUsers(users.map { detailedUserMapper.mapFromEntity(it) })
+    }
+
+    override fun rxDeleteCachedUser(id: Id): Completable {
+        return cache.rxDeleteCachedUser(id)
     }
 }
