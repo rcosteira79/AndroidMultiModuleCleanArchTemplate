@@ -66,6 +66,7 @@ class DetailedUsersAdapter constructor(
         }
     }
 
+    // This is pretty simple, so it shouldn't be a problem if it runs in the main thread
     class DiffCallback : DiffUtil.ItemCallback<DisplayedDetailedUser>() {
         override fun areItemsTheSame(
             oldItem: DisplayedDetailedUser,

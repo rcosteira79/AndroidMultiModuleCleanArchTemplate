@@ -1,5 +1,5 @@
 <resources>
-    <string name="rx_java_to_coroutines_app_name">RxJava to Coroutines</string>
+    <string name="rx_java_to_coroutines_app_name">RxJava to Kotlin Coroutines</string>
     <string name="username_search_label">Search for a username</string>
     <string name="rv_item_name_label">Name:</string>
     <string name="rv_item_email_label">Email:</string>

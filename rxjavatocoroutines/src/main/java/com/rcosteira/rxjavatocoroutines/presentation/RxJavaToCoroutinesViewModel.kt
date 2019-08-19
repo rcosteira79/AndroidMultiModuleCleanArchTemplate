@@ -1,5 +1,6 @@
 package com.rcosteira.rxjavatocoroutines.presentation
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.rcosteira.core.domain.Id
@@ -78,6 +79,7 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
     }
 
     // Gets users from the api and stores them in the database
+    @VisibleForTesting
     private fun updateCacheWithRx() {
         getUsersFromApiAsSingle()
             .doOnSuccess { Logger.d("Updating database") }
@@ -89,6 +91,7 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
             .addTo(compositeDisposable) // Extension function
     }
 
+    @VisibleForTesting
     private fun getUsersFromApiAsSingle(): Single<List<DetailedUser>> {
         return rxGetUsersFromApi(NoParameters())
             .take(USER_LIMIT) // Github API has a hourly call limit :D and 5 are enough for what we're doing
@@ -119,25 +122,31 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
         viewModelScope.launch(exceptionHandler) {
             // But the request should go to the backgound
             withContext(Dispatchers.IO) {
-                val userList = getUsersFromApi(NoParameters()) // List<User>
-                    .take(USER_LIMIT.toInt()) // Github API has a hourly call limit :D and 5 are enough for what we're doing
-                    .map { async { getUserDetailsFromApi(it.username) } } // Yay concurrency!
-                    .map { it.await() } // Wait for them to finish... These two last maps are pretty much a flatMap
-
-                if (userList.isNotEmpty()) {
-                    Logger.d("Updating database")
-                    updateCachedUsers(userList)
-                }
-            }
-
-            // Don't forget: at this point, we're in the main thread context!
+                getUsersFromApiThroughCoroutine(this)
+            } // Don't forget: at this point, we're in the main thread context again!
         }
     }
 
+    private suspend fun getUsersFromApiThroughCoroutine(coroutineScope: CoroutineScope) {
+        val userList = getUsersFromApi(NoParameters()) // List<User>
+            .take(USER_LIMIT.toInt()) // Github API has a hourly call limit :D and 5 are enough for what we're doing
+            .map { coroutineScope.async { getUserDetailsFromApi(it.username) } } // Yay concurrency!
+            .map { it.await() } // Wait for them to finish... These two last maps are pretty much a flatMap
+
+        if (userList.isNotEmpty()) {
+            Logger.d("Updating database")
+            updateCachedUsers(userList)
+        }
+    }
 
     private fun handleErrors(error: Throwable?) {
         // TODO deal with the exceptions
         Logger.e(error, "Error")
     }
 
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
+    }
 }

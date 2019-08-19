@@ -7,8 +7,8 @@
         android:title="@string/recycler_view_example_app_name"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/rxJavaToKotlinFlows"
-        android:icon="@drawable/rx_java_kotlin_flows_icon"
+        android:id="@+id/rxJavaToCoroutines"
+        android:icon="@drawable/rx_java_kotlin_coroutines_icon"
         android:title="@string/rx_java_to_coroutines_app_name"
         app:showAsAction="ifRoom" />
 </menu>

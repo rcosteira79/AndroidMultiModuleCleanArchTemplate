@@ -19,7 +19,7 @@ class HomeActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         val navController = findNavController(R.id.nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.recyclerViewExample, R.id.rxJavaToCoroutines))
 
         setupActionBar(navController, appBarConfiguration)
         setupBottomNavigationBar(navController)
