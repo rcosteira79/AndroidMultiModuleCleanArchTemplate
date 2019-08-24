@@ -1,9 +1,8 @@
-apply {
-    from("$rootDir/android-library-build.gradle")
-}
+apply { from("$rootDir/android-library-build.gradle") }
 
 dependencies {
     "implementation"(project(Modules.core))
+    "androidTestImplementation"(project(Modules.core))
 
     "implementation"(Libraries.rxJava)
     "implementation"(Libraries.rxAndroid)

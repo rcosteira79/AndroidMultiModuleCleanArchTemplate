@@ -80,7 +80,7 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
 
     // Gets users from the api and stores them in the database
     @VisibleForTesting
-    private fun updateCacheWithRx() {
+    fun updateCacheWithRx() {
         getUsersFromApiAsSingle()
             .doOnSuccess { Logger.d("Updating database") }
             .subscribeOn(Schedulers.io())
@@ -92,7 +92,7 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
     }
 
     @VisibleForTesting
-    private fun getUsersFromApiAsSingle(): Single<List<DetailedUser>> {
+    fun getUsersFromApiAsSingle(): Single<List<DetailedUser>> {
         return rxGetUsersFromApi(NoParameters())
             .take(USER_LIMIT) // Github API has a hourly call limit :D and 5 are enough for what we're doing
             .flatMapMaybe { rxGetUserDetailsFromApi(it.username) } // second api call with information from the first one

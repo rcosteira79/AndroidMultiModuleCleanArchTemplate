@@ -1,1 +1,6 @@
-<manifest package="com.rcosteira.rxjavatocoroutines" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rcosteira.rxjavatocoroutines">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>
