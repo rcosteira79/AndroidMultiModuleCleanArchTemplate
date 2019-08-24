@@ -20,21 +20,16 @@ android {
     defaultConfig {
         minSdkVersion(Android.minSDK)
         targetSdkVersion(Android.targetSDK)
-
         applicationId = Android.applicationId
         versionCode = Android.appVersionCode
         versionName = Android.appVersionName
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Android.androidTestRunner
     }
     buildTypes {
 
         getByName("release") {
             isShrinkResources = true
             isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
         }
 
         getByName("debug") {
@@ -70,10 +65,14 @@ dependencies {
     kapt(Libraries.daggerAndroidProcessor)
 
     debugImplementation(Libraries.leakCanary)
+    
+    androidTestImplementation(TestingLibraries.androidCoreTesting)
+    androidTestImplementation(TestingLibraries.androidJUnit)
+    androidTestImplementation(TestingLibraries.googleTruth)
+    androidTestImplementation(TestingLibraries.espressoCore)
+    androidTestImplementation(TestingLibraries.mockWebServer)
 
     testImplementation(TestingLibraries.junit)
-    testImplementation(TestingLibraries.testRunner)
-
 }
 
 /*

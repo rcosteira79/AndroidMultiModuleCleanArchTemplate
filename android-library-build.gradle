@@ -9,8 +9,9 @@ android {
     defaultConfig {
         minSdkVersion Android.minSDK
         targetSdkVersion Android.targetSDK
-        versionCode Android.appVersionCode
-        versionName Android.appVersionName
+        versionCode = Android.appVersionCode
+        versionName = Android.appVersionName
+        testInstrumentationRunner = Android.androidTestRunner
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -26,7 +27,6 @@ android {
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
@@ -57,4 +57,12 @@ dependencies {
     implementation Libraries.daggerAndroidSupport
     kapt Libraries.daggerCompiler
     kapt Libraries.daggerAndroidProcessor
+
+    androidTestImplementation TestingLibraries.androidCoreTesting
+    androidTestImplementation TestingLibraries.androidJUnit
+    androidTestImplementation TestingLibraries.googleTruth
+    androidTestImplementation TestingLibraries.espressoCore
+    androidTestImplementation TestingLibraries.mockWebServer
+
+    testImplementation TestingLibraries.junit
 }

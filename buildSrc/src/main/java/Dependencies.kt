@@ -7,12 +7,12 @@ object Modules {
 
 object Versions {
     // Plugins
-    const val androidGradlePlugin = "3.5.0-rc03"
+    const val androidGradlePlugin = "3.5.0"
     const val gradleVersionsPlugin = "0.22.0"
 
     // Kotlin
-    const val kotlin = "1.3.41"
-    const val coroutines = "1.3.0-RC2"
+    const val kotlin = "1.3.50"
+    const val coroutines = "1.3.0"
 
     // Android libraries
     const val support = "1.1.0-rc01"
@@ -20,7 +20,7 @@ object Versions {
     const val coreKtx = "1.2.0-alpha03"
     const val materialDesign = "1.1.0-alpha09"
     const val constraintLayout = "2.0.0-beta2"
-    const val room = "2.2.0-alpha02"
+    const val room = "2.2.0-beta01"
     const val navigation = "1.0.0"
     const val dataBinding = "3.2.1"
     const val recyclerView = "1.1.0-beta01"
@@ -28,8 +28,13 @@ object Versions {
 
     // Testing
     const val junit = "4.12"
+    const val googleTruth = "1.0"
+    const val mockWebServer = "4.1.0"
+
+    // Instrumentation only
+    const val androidJUnit = "1.1.0"
+    const val androidCoreTesting = "2.0.1"
     const val espresso = "3.2.0-beta01"
-    const val testRunner = "1.2.0-beta01"
     const val jacoco = "0.8.4"
 
     // Logging and error handling
@@ -38,14 +43,14 @@ object Versions {
     const val firebaseCore = "17.0.1"
     const val crashlytics = "2.10.1"
     const val googleServices = "4.3.0"
-    const val leakCanary = "2.0-beta-2"
+    const val leakCanary = "2.0-beta-3"
 
     // Dependency injection
     const val dagger = "2.24"
 
     // Network
     const val retrofit = "2.6.1"
-    const val okHttp = "4.0.1"
+    const val okHttp = "4.1.0"
 
     // Rx
     const val rxjava = "2.2.11"
@@ -62,6 +67,7 @@ object Android {
     const val targetSDK = 28
     const val appVersionCode = 1
     const val appVersionName = "1.0.0"
+    const val androidTestRunner = "androidx.test.runner.AndroidJUnitRunner"
 }
 
 object Libraries {
@@ -123,9 +129,13 @@ object AndroidLibraries {
 
 object TestingLibraries {
     const val junit = "junit:junit:${Versions.junit}"
+    const val googleTruth = "com.google.truth:truth:${Versions.googleTruth}"
+    const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.mockWebServer}"
+
+    // instrumentation only
+    const val androidJUnit = "androidx.test.ext:junit:${Versions.androidJUnit}"
+    const val androidCoreTesting = "androidx.arch.core:core-testing:${Versions.androidCoreTesting}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
-    const val testRunner = "androidx.test:runner:${Versions.testRunner}"
     const val roomTestHelpers = "androidx.room:room-testing:${Versions.room}"
-    const val navigationTesting =
-        "android.arch.navigation:navigation-testing:${Versions.navigation}"
+    const val navigationTesting = "android.arch.navigation:navigation-testing:${Versions.navigation}"
 }

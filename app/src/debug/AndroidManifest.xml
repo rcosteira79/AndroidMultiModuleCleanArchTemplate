@@ -1,8 +1,0 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.rcosteira.template">
-
-  <application>
-    <activity android:name=".testing.SingleFragmentActivity" />
-  </application>
-
-</manifest>

@@ -62,7 +62,7 @@ class GithubUsersRepository @Inject constructor(
 
     override fun rxGetUsersFromApi(): Observable<User> {
         return api.rxGetAllUsers() // Maybe for semantic purposes - one possible response on each request.
-            .flattenAsObservable { it } // However, transformations are easier with Observables :)
+            .flattenAsObservable { it } // However, we need to transform each element of the list
             .map { userMapper.mapToEntity(it) }
     }
 
