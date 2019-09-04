@@ -7,7 +7,6 @@ Android template project following a multi module approach with clean architectu
 - Dagger2: https://github.com/google/dagger
 - Retrofit (with OkHttp for logging): https://github.com/square/retrofit
 - Moshi: https://github.com/square/moshi
-- Kotlin Coroutines Adapter: https://github.com/JakeWharton/retrofit2-kotlin-coroutines-adapter
 - Timber: https://github.com/JakeWharton/timber
 - Firebase Crashlytics: https://firebase.google.com/docs/crashlytics/get-started#android
 - Gradle Versions Plugin: https://github.com/ben-manes/gradle-versions-plugin
@@ -18,15 +17,12 @@ Android template project following a multi module approach with clean architectu
 2. buildSrc: Module used by Gradle to manage dependencies;
 3. core: Module with common code;
 4. Logging: Module responsible for managing the logging system and Crashlytics;
-5. recyclerviewexample: Module that demonstrates a recycler view implementation with Architecture Components, Coroutines and Retrofit
+5. recyclerviewexample: Module that demonstrates a recycler view implementation with Architecture Components, Coroutines and Retrofit. Mainly used for my ["How not to use sealed classes and livedata for state management" article](https://ricardocosteira.com/how-not-to-use-sealed-classes-and-livedata-for-state-management)
+6. rxjavatocoroutines: Module that showcases usage of coroutines library - coroutines, Flow and Channels - and RxJava counterparts. Mainly used for my ["Going with the Flow: From RxJava to Coroutines" article series](https://ricardocosteira.com/going-with-the-flow-rxjava-to-coroutines-part-1)
 
 ## In progress
 
-- recyclerviewexample module
-
-## Todo as soon as I have the time :) (in order):
-
-- Add template module with navigation logic to any existent example modules
+- rxjavatocoroutines module
 
 ## License
 
