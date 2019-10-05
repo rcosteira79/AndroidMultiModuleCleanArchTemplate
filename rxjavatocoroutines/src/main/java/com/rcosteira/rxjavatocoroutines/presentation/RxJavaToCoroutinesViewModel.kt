@@ -19,6 +19,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class RxJavaToCoroutinesViewModel @Inject constructor(
@@ -35,7 +37,7 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     companion object {
-        const val USER_LIMIT: Long = 10
+        const val USER_LIMIT: Long = 5
     }
 
     val viewState: LiveData<RxJavaToCoroutinesViewState>
@@ -45,8 +47,10 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
 
     init {
         _viewState.value = RxJavaToCoroutinesViewState(isLoading = true)
-        setUserViewStateFromCacheWithRx()
-        updateCacheWithRx()
+        //setUserViewStateFromCacheWithRx()
+        //updateCacheWithRx()
+        setUserViewStateFromCacheWithCoroutines()
+        updateCacheWithCoroutines()
     }
 
     fun processEvents(event: RxJavaToCoroutinesViewEvents) {
@@ -58,11 +62,11 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
     /******************************** RxJava ********************************/
 
     // Gets users from the database to the view
-    private fun setUserViewStateFromCacheWithRx() {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun setUserViewStateFromCacheWithRx() {
         rxGetCachedUsers(NoParameters())
             .doOnNext { Logger.d("Database was updated. Will emit UI update.") }
             .mapListElements { displayedDetailedUserMapper.mapToUI(it) } // Extension function
-            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { this.handleDetailedUsers(it) },
@@ -79,7 +83,7 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
     }
 
     // Gets users from the api and stores them in the database
-    @VisibleForTesting
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun updateCacheWithRx() {
         getUsersFromApiAsSingle()
             .doOnSuccess { Logger.d("Updating database") }
@@ -91,7 +95,7 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
             .addTo(compositeDisposable) // Extension function
     }
 
-    @VisibleForTesting
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun getUsersFromApiAsSingle(): Single<List<DetailedUser>> {
         return rxGetUsersFromApi(NoParameters())
             .take(USER_LIMIT) // Github API has a hourly call limit :D and 5 are enough for what we're doing
@@ -108,8 +112,20 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
     }
 
     /******************************** Coroutines ********************************/
+    @ExperimentalCoroutinesApi
     private fun setUserViewStateFromCacheWithCoroutines() {
-        // TODO implement
+        val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+            handleErrors(throwable)
+        }
+
+        viewModelScope.launch(exceptionHandler) {
+            getCachedUsers(NoParameters())
+                .mapListElements { displayedDetailedUserMapper.mapToUI(it) }
+                .flowOn(Dispatchers.IO)
+                .collect {
+                    handleDetailedUsers(it)
+                }
+        }
     }
 
     private fun updateCacheWithCoroutines() {
@@ -122,7 +138,7 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
         viewModelScope.launch(exceptionHandler) {
             // But the request should go to the backgound
             withContext(Dispatchers.IO) {
-                getUsersFromApiThroughCoroutine(this)
+                getUsersFromApiThroughCoroutine(coroutineScope = this)
             } // Don't forget: at this point, we're in the main thread context again!
         }
     }

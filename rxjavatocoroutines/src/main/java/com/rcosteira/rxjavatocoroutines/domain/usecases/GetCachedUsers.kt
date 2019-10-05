@@ -10,5 +10,5 @@ import javax.inject.Inject
 class GetCachedUsers @Inject constructor(
     private val usersRepository: UsersRepository
 ) : FlowUseCase<List<DetailedUser>, NoParameters>() {
-    override suspend fun run(params: NoParameters): Flow<List<DetailedUser>> = usersRepository.getCachedUsers()
+    override fun run(params: NoParameters): Flow<List<DetailedUser>> = usersRepository.getCachedUsers()
 }

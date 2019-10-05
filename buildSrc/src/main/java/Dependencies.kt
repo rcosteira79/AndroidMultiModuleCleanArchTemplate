@@ -8,19 +8,19 @@ object Modules {
 object Versions {
     // Plugins
     const val androidGradlePlugin = "3.5.0"
-    const val gradleVersionsPlugin = "0.22.0"
+    const val gradleVersionsPlugin = "0.25.0"
 
     // Kotlin
     const val kotlin = "1.3.50"
-    const val coroutines = "1.3.0"
+    const val coroutines = "1.3.2"
 
     // Android libraries
-    const val support = "1.1.0-rc01"
+    const val support = "1.1.0"
     const val supportAnnotations = "1.1.0"
-    const val coreKtx = "1.2.0-alpha03"
-    const val materialDesign = "1.1.0-alpha09"
+    const val coreKtx = "1.2.0-alpha04"
+    const val materialDesign = "1.1.0-alpha10"
     const val constraintLayout = "2.0.0-beta2"
-    const val room = "2.2.0-beta01"
+    const val room = "2.2.0-rc01"
     const val navigation = "1.0.0"
     const val dataBinding = "3.2.1"
     const val recyclerView = "1.1.0-beta01"
@@ -49,15 +49,15 @@ object Versions {
     const val dagger = "2.24"
 
     // Network
-    const val retrofit = "2.6.1"
-    const val okHttp = "4.1.0"
+    const val retrofit = "2.6.2"
+    const val okHttp = "4.2.1"
 
     // Rx
-    const val rxjava = "2.2.11"
+    const val rxjava = "2.2.13"
     const val rxAndroid = "2.1.1"
 
     // Image loading
-    const val glide = "4.9.0"
+    const val glide = "4.10.0"
 }
 
 object Android {

@@ -15,8 +15,10 @@ import com.rcosteira.core.data.cache.RoomCache
 import com.rcosteira.core.data.entities.GithubDetailedUser
 import com.rcosteira.core.data.mappers.DetailedUserMapper
 import com.rcosteira.core.data.mappers.UserMapper
+import com.rcosteira.core.domain.*
 import com.rcosteira.core.domain.entities.DetailedUser
 import com.rcosteira.rxjavatocoroutines.domain.usecases.*
+import com.rcosteira.rxjavatocoroutines.presentation.entities.DisplayedDetailedUser
 import com.rcosteira.rxjavatocoroutines.presentation.mappers.DisplayedDetailedUserMapper
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.TestObserver
@@ -101,5 +103,34 @@ class RxJavaToCoroutinesViewModelTest {
 
         assertThat(users.count()).isEqualTo(2)
         assertThat(users.last().blog).isEqualTo("http://chriswanstrath.com/")
+    }
+
+
+    @Test
+    fun setUserViewStateFromCacheWithRx_successful() {
+        viewModel.updateCacheWithRx()
+
+        viewModel.setUserViewStateFromCacheWithRx()
+
+        val users = listOf(
+            DisplayedDetailedUser(
+                Id(1),
+                Username("mojombo"),
+                Name("Tom Preston-Werner"),
+                Blog("http://tom.preston-werner.com"),
+                Location("San Francisco"),
+                Avatar("https://avatars0.githubusercontent.com/u/1?v=4")
+            ),
+            DisplayedDetailedUser(
+                Id(2),
+                Username("defunkt"),
+                Name("Chris Wanstrath"),
+                Blog("http://chriswanstrath.com/"),
+                Location(""),
+                Avatar("https://avatars0.githubusercontent.com/u/2?v=4")
+            )
+        )
+
+        assertThat(viewModel.viewState.value).isEqualTo(RxJavaToCoroutinesViewState(detailedUsers = users))
     }
 }
