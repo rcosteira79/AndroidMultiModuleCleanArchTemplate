@@ -126,7 +126,7 @@ class RxJavaToCoroutinesViewModelTest {
                 Username("defunkt"),
                 Name("Chris Wanstrath"),
                 Blog("http://chriswanstrath.com/"),
-                Location(""),
+                Location("N/A"),
                 Avatar("https://avatars0.githubusercontent.com/u/2?v=4")
             )
         )

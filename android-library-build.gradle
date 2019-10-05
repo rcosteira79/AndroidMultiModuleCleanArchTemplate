@@ -48,6 +48,12 @@ android {
     }
 
     kotlinOptions.freeCompilerArgs = ["-XXLanguage:+InlineClasses", "-Xskip-metadata-version-check"]
+
+    sourceSets {
+        androidTest {
+            java.srcDir project(Modules.core).file("src/androidTest/Java")
+        }
+    }
 }
 
 dependencies {
