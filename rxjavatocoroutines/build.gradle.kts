@@ -8,4 +8,5 @@ dependencies {
     "implementation"(Libraries.rxAndroid)
 
     "implementation"(AndroidLibraries.constraintLayout)
+    "androidTestImplementation"(TestingLibraries.coroutinesTest)
 }

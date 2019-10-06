@@ -51,7 +51,8 @@ android {
 
     sourceSets {
         androidTest {
-            java.srcDir project(Modules.core).file("src/androidTest/Java")
+            java.srcDir project(Modules.core).file("src/androidTest/Java/com/rcosteira/core/data/api/WebServerDispatcher.kt")
+            java.srcDir project(Modules.core).file("src/androidTest/Java/com/rcosteira/core/data/api/MockWebServerSetup.kt")
         }
     }
 }

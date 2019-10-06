@@ -6,6 +6,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
 import com.rcosteira.core.data.api.Api
 import com.rcosteira.core.data.api.GithubApi
+import com.rcosteira.core.data.api.MockWebServerSetup
 import com.rcosteira.core.data.cache.Cache
 import com.rcosteira.core.data.cache.GithubDatabase
 import com.rcosteira.core.data.cache.RoomCache
@@ -16,6 +17,8 @@ import com.rcosteira.core.domain.entities.DetailedUser
 import com.rcosteira.core.domain.entities.User
 import com.rcosteira.core.domain.repositories.UsersRepository
 import io.reactivex.observers.TestObserver
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -81,5 +84,23 @@ class GithubUsersRepositoryTest {
 
         assertThat(users.count()).isEqualTo(1)
         assertThat(users.first().location.value).isEqualTo("San Francisco")
+    }
+
+    //****************************** coroutines **********************************/
+    @ExperimentalCoroutinesApi
+    @Test
+    fun getUsersFromApi_successful_returnsListOfUsers() = runBlocking {
+        val users = usersRepository.getUsersFromApi()
+
+        assertThat(users.count()).isEqualTo(2)
+        assertThat(users.first().username.value).isEqualTo("mojombo")
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun getUserDetailsFromApi_successful_returnsMaybeDetailedUser() = runBlocking {
+        val detailedUser = usersRepository.getUserDetailsFromApi(Username("mojombo"))
+
+        assertThat(detailedUser.location.value).isEqualTo("San Francisco")
     }
 }

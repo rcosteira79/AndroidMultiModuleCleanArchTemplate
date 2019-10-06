@@ -136,6 +136,5 @@ object TestingLibraries {
     const val androidJUnit = "androidx.test.ext:junit:${Versions.androidJUnit}"
     const val androidCoreTesting = "androidx.arch.core:core-testing:${Versions.androidCoreTesting}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
-    const val roomTestHelpers = "androidx.room:room-testing:${Versions.room}"
-    const val navigationTesting = "android.arch.navigation:navigation-testing:${Versions.navigation}"
+    const val coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
 }

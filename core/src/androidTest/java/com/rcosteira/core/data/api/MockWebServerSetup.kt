@@ -1,4 +1,4 @@
-package com.rcosteira.core.data
+package com.rcosteira.core.data.api
 
 import android.content.Context
 import okhttp3.mockwebserver.MockWebServer

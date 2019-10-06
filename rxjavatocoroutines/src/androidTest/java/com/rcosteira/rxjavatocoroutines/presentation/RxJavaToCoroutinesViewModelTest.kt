@@ -6,9 +6,9 @@ import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
 import com.rcosteira.core.data.GithubUsersRepository
-import com.rcosteira.core.data.MockWebServerSetup
 import com.rcosteira.core.data.api.Api
 import com.rcosteira.core.data.api.GithubApi
+import com.rcosteira.core.data.api.MockWebServerSetup
 import com.rcosteira.core.data.cache.Cache
 import com.rcosteira.core.data.cache.GithubDatabase
 import com.rcosteira.core.data.cache.RoomCache
@@ -23,18 +23,29 @@ import com.rcosteira.rxjavatocoroutines.presentation.mappers.DisplayedDetailedUs
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.TestObserver
 import io.reactivex.subscribers.TestSubscriber
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.*
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.concurrent.Executors
 
 class RxJavaToCoroutinesViewModelTest {
     private lateinit var webServer: MockWebServer
     private lateinit var database: GithubDatabase
     private lateinit var viewModel: RxJavaToCoroutinesViewModel
     private lateinit var compositeDisposable: CompositeDisposable
+
+    private val mainThreadSurrogate = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -76,11 +87,16 @@ class RxJavaToCoroutinesViewModelTest {
             DisplayedDetailedUserMapper(),
             compositeDisposable
         )
+
+        Dispatchers.setMain(mainThreadSurrogate)
     }
 
     @After
     fun teardown() {
         webServer.shutdown()
+
+        Dispatchers.resetMain() // reset main dispatcher to the original Main dispatcher
+        mainThreadSurrogate.close()
     }
 
     @Test
@@ -132,5 +148,28 @@ class RxJavaToCoroutinesViewModelTest {
         )
 
         assertThat(viewModel.viewState.value).isEqualTo(RxJavaToCoroutinesViewState(detailedUsers = users))
+    }
+
+    //****************************** coroutines **********************************/
+    @ExperimentalCoroutinesApi
+    @Test
+    fun getUsersFromApiThroughCoroutine_successful() = runBlocking {
+        val users = viewModel.getUsersFromApiThroughCoroutine(this)
+
+        assertThat(users.count()).isEqualTo(2)
+        assertThat(users.first().location.value).isEqualTo("San Francisco")
+    }
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun updateCacheWithCoroutines_successful() = runBlockingTest {
+        val userFlow = database.usersDao().getAllUsers()
+
+        viewModel.updateCacheWithCoroutines()
+
+        userFlow.collect { users ->
+            assertThat(users.count()).isEqualTo(2)
+            assertThat(users.last().blog).isEqualTo("http://chriswanstrath.com/")
+        }
     }
 }

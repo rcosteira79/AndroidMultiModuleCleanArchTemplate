@@ -128,7 +128,8 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
         }
     }
 
-    private fun updateCacheWithCoroutines() {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun updateCacheWithCoroutines() {
         // I don't like try-catch. So we're using an exception handler instead
         val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
             handleErrors(throwable)
@@ -138,28 +139,28 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
         viewModelScope.launch(exceptionHandler) {
             // But the request should go to the backgound
             withContext(Dispatchers.IO) {
-                getUsersFromApiThroughCoroutine(coroutineScope = this)
+                val users = getUsersFromApiThroughCoroutine(coroutineScope = this)
+
+                if (users.isNotEmpty()) {
+                    Logger.d("Updating database")
+                    updateCachedUsers(users)
+                }
             } // Don't forget: at this point, we're in the main thread context again!
         }
     }
 
-    private suspend fun getUsersFromApiThroughCoroutine(coroutineScope: CoroutineScope) {
-        val userList = getUsersFromApi(NoParameters()) // List<User>
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    suspend fun getUsersFromApiThroughCoroutine(coroutineScope: CoroutineScope): List<DetailedUser> {
+        return getUsersFromApi(NoParameters()) // List<User>
             .take(USER_LIMIT.toInt()) // Github API has a hourly call limit :D and 5 are enough for what we're doing
             .map { coroutineScope.async { getUserDetailsFromApi(it.username) } } // Yay concurrency!
             .map { it.await() } // Wait for them to finish... These two last maps are pretty much a flatMap
-
-        if (userList.isNotEmpty()) {
-            Logger.d("Updating database")
-            updateCachedUsers(userList)
-        }
     }
 
     private fun handleErrors(error: Throwable?) {
         // TODO deal with the exceptions
         Logger.e(error, "Error")
     }
-
 
     override fun onCleared() {
         super.onCleared()
