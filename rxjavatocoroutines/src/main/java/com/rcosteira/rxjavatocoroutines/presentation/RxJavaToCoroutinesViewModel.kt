@@ -12,6 +12,7 @@ import com.rcosteira.core.ui.BaseViewModel
 import com.rcosteira.logging.Logger
 import com.rcosteira.rxjavatocoroutines.domain.usecases.*
 import com.rcosteira.rxjavatocoroutines.presentation.RxJavaToCoroutinesViewEvents.DeleteUser
+import com.rcosteira.rxjavatocoroutines.presentation.RxJavaToCoroutinesViewEvents.RequestUsers
 import com.rcosteira.rxjavatocoroutines.presentation.entities.DisplayedDetailedUser
 import com.rcosteira.rxjavatocoroutines.presentation.mappers.DisplayedDetailedUserMapper
 import io.reactivex.Single
@@ -33,7 +34,8 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
     private val updateCachedUsers: UpdateCachedUsers,
     private val rxDeleteCachedUser: RxDeleteCachedUser,
     private val displayedDetailedUserMapper: DisplayedDetailedUserMapper,
-    private val compositeDisposable: CompositeDisposable
+    private val compositeDisposable: CompositeDisposable,
+    private val backgroundDispatcher: CoroutineDispatcher
 ) : BaseViewModel() {
 
     companion object {
@@ -47,16 +49,20 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
 
     init {
         _viewState.value = RxJavaToCoroutinesViewState(isLoading = true)
-        //setUserViewStateFromCacheWithRx()
-        //updateCacheWithRx()
-        setUserViewStateFromCacheWithCoroutines()
-        updateCacheWithCoroutines()
     }
 
     fun processEvents(event: RxJavaToCoroutinesViewEvents) {
         when (event) {
+            is RequestUsers -> connectUIToViewState()
             is DeleteUser -> rxDeleteUser(event.id)
         }
+    }
+
+    private fun connectUIToViewState() {
+        //setUserViewStateFromCacheWithRx()
+        //updateCacheWithRx()
+        setUserViewStateFromCacheWithCoroutines()
+        updateCacheWithCoroutines()
     }
 
     /******************************** RxJava ********************************/
@@ -121,10 +127,8 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
         viewModelScope.launch(exceptionHandler) {
             getCachedUsers(NoParameters())
                 .mapListElements { displayedDetailedUserMapper.mapToUI(it) }
-                .flowOn(Dispatchers.IO)
-                .collect {
-                    handleDetailedUsers(it)
-                }
+                .flowOn(backgroundDispatcher)
+                .collect { handleDetailedUsers(it) }
         }
     }
 
@@ -135,17 +139,17 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
             handleErrors(throwable)
         }
 
-        // we want the coroutine to be bounded to the ViewModel's lifecycle (it's on the main thread)
+        // we want the coroutine to be bounded to the ViewModel's lifecycle
         viewModelScope.launch(exceptionHandler) {
-            // But the request should go to the backgound
-            withContext(Dispatchers.IO) {
-                val users = getUsersFromApiThroughCoroutine(coroutineScope = this)
+            // But the request should go to the background. However, Retrofit has its custom dispatcher, so we're good
+            val users = getUsersFromApiThroughCoroutine(coroutineScope = this)
 
-                if (users.isNotEmpty()) {
-                    Logger.d("Updating database")
-                    updateCachedUsers(users)
-                }
-            } // Don't forget: at this point, we're in the main thread context again!
+            if (users.isNotEmpty()) {
+                Logger.d("Updating database")
+                // as for Room, we have to be excplicit on the background. Since it doesn't have its own coroutine
+                // dispatcher, it'll complain about database access in main thread.
+                withContext(backgroundDispatcher) { updateCachedUsers(users) }
+            }
         }
     }
 

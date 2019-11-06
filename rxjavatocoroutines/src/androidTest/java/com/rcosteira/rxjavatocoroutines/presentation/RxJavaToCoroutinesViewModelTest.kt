@@ -23,21 +23,19 @@ import com.rcosteira.rxjavatocoroutines.presentation.mappers.DisplayedDetailedUs
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.TestObserver
 import io.reactivex.subscribers.TestSubscriber
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
-import org.junit.*
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.concurrent.Executors
 
 class RxJavaToCoroutinesViewModelTest {
     private lateinit var webServer: MockWebServer
@@ -45,17 +43,17 @@ class RxJavaToCoroutinesViewModelTest {
     private lateinit var viewModel: RxJavaToCoroutinesViewModel
     private lateinit var compositeDisposable: CompositeDisposable
 
-    private val mainThreadSurrogate = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @get:Rule
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
+    val rxImmediateSchedulerRule = RxImmediateSchedulerRule()
 
-    companion object {
-        @ClassRule
-        @JvmField
-        val schedulers = RxImmediateSchedulerRule()
-    }
+    @ExperimentalCoroutinesApi
+    @get:Rule
+    val mainCoroutineRule = MainCoroutineRule()
 
+    @ExperimentalCoroutinesApi
     @Before
     fun setUp() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
@@ -85,42 +83,45 @@ class RxJavaToCoroutinesViewModelTest {
             UpdateCachedUsers(usersRepository),
             RxDeleteCachedUser(usersRepository),
             DisplayedDetailedUserMapper(),
-            compositeDisposable
+            compositeDisposable,
+            mainCoroutineRule.testDispatcher
         )
-
-        Dispatchers.setMain(mainThreadSurrogate)
     }
 
     @After
     fun teardown() {
         webServer.shutdown()
-
-        Dispatchers.resetMain() // reset main dispatcher to the original Main dispatcher
-        mainThreadSurrogate.close()
     }
 
     @Test
     fun getUsersFromApiAsSingle_successful_returnsASingleListOfUsers() {
+        val expectedNumberOfUsers = 2
+        val expectedFirstUserLocation = "San Francisco"
+
         val testObserver: TestObserver<List<DetailedUser>> = viewModel.getUsersFromApiAsSingle().test()
 
         testObserver.assertComplete()
         testObserver.assertNoErrors()
 
         val users: List<DetailedUser> = testObserver.values().first() // List<List<DetailedUser>>
-        assertThat(users.count()).isEqualTo(2)
-        assertThat(users.first().location.value).isEqualTo("San Francisco")
+        assertThat(users.count()).isEqualTo(expectedNumberOfUsers)
+        assertThat(users.first().location.value).isEqualTo(expectedFirstUserLocation)
     }
 
+    @ExperimentalCoroutinesApi
     @Test
     fun updateCacheWithRx_successful() {
+        val expectedNumberOfUsers = 2
+        val expectedSecondUserBlog = "http://chriswanstrath.com/"
+
         viewModel.updateCacheWithRx()
+
         val testSubscriber: TestSubscriber<List<GithubDetailedUser>> = database.usersDao().rxGetAllUsers().test()
         val users: List<GithubDetailedUser> = testSubscriber.values().first() // List<List<GithubDetailedUser>>
 
-        assertThat(users.count()).isEqualTo(2)
-        assertThat(users.last().blog).isEqualTo("http://chriswanstrath.com/")
+        assertThat(users.count()).isEqualTo(expectedNumberOfUsers)
+        assertThat(users.last().blog).isEqualTo(expectedSecondUserBlog)
     }
-
 
     @Test
     fun setUserViewStateFromCacheWithRx_successful() {
@@ -154,22 +155,28 @@ class RxJavaToCoroutinesViewModelTest {
     @ExperimentalCoroutinesApi
     @Test
     fun getUsersFromApiThroughCoroutine_successful() = runBlocking {
+        val expectedNumberOfUsers = 2
+        val expectedFirstUserLocation = "San Francisco"
+
         val users = viewModel.getUsersFromApiThroughCoroutine(this)
 
-        assertThat(users.count()).isEqualTo(2)
-        assertThat(users.first().location.value).isEqualTo("San Francisco")
+        assertThat(users.count()).isEqualTo(expectedNumberOfUsers)
+        assertThat(users.first().location.value).isEqualTo(expectedFirstUserLocation)
     }
 
     @ExperimentalCoroutinesApi
     @Test
-    fun updateCacheWithCoroutines_successful() = runBlockingTest {
-        val userFlow = database.usersDao().getAllUsers()
+    fun updateCacheWithCoroutines_successful() = mainCoroutineRule.runBlockingTest {
+        val expectedNumberOfUsers = 2
+        val expectedSecondUserBlog = "http://chriswanstrath.com/"
 
         viewModel.updateCacheWithCoroutines()
 
-        userFlow.collect { users ->
-            assertThat(users.count()).isEqualTo(2)
-            assertThat(users.last().blog).isEqualTo("http://chriswanstrath.com/")
-        }
+        database.usersDao().getAllUsers()
+            .flowOn(mainCoroutineRule.testDispatcher)
+            .collect { users ->
+                assertThat(users.count()).isEqualTo(expectedNumberOfUsers)
+                assertThat(users.last().blog).isEqualTo(expectedSecondUserBlog)
+            }
     }
 }

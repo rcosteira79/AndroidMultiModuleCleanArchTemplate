@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rcosteira.core.domain.Id
 import com.rcosteira.core.extensions.observe
 import com.rcosteira.core.ui.BaseFragment
 import com.rcosteira.rxjavatocoroutines.R
 import com.rcosteira.rxjavatocoroutines.presentation.RxJavaToCoroutinesViewEvents.DeleteUser
+import com.rcosteira.rxjavatocoroutines.presentation.RxJavaToCoroutinesViewEvents.RequestUsers
 import com.rcosteira.rxjavatocoroutines.presentation.entities.DisplayedDetailedUser
 import kotlinx.android.synthetic.main.fragment_rx_java_to_coroutines.*
 
@@ -33,6 +33,8 @@ class RxJavaToCoroutinesFragment : BaseFragment(), CardButtonClickListener<Id> {
         viewModel = createViewModel(this) {
             observe(viewLifecycleOwner, viewState, ::renderViewState)
         }
+
+        viewModel.processEvents(RequestUsers)
     }
 
     // Method that is called when we click a delete button on a card

@@ -10,6 +10,8 @@ import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
 @Module
 abstract class RxJavaToCoroutinesModule {
@@ -29,5 +31,9 @@ abstract class RxJavaToCoroutinesModule {
         @JvmStatic
         @Provides
         fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
+
+        @JvmStatic
+        @Provides
+        fun provideBackgroundDispatcher(): CoroutineDispatcher = Dispatchers.IO
     }
 }

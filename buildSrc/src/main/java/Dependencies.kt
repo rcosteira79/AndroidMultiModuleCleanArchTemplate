@@ -8,7 +8,7 @@ object Modules {
 object Versions {
     // Plugins
     const val androidGradlePlugin = "3.5.0"
-    const val gradleVersionsPlugin = "0.25.0"
+    const val gradleVersionsPlugin = "0.27.0"
 
     // Kotlin
     const val kotlin = "1.3.50"
@@ -17,25 +17,25 @@ object Versions {
     // Android libraries
     const val support = "1.1.0"
     const val supportAnnotations = "1.1.0"
-    const val coreKtx = "1.2.0-alpha04"
-    const val materialDesign = "1.1.0-alpha10"
-    const val constraintLayout = "2.0.0-beta2"
-    const val room = "2.2.0-rc01"
+    const val coreKtx = "1.2.0-beta01"
+    const val materialDesign = "1.2.0-alpha01"
+    const val constraintLayout = "2.0.0-beta3"
+    const val room = "2.2.1"
     const val navigation = "1.0.0"
     const val dataBinding = "3.2.1"
     const val recyclerView = "1.1.0-beta01"
-    const val lifecycleExtensions = "2.0.0"
+    const val lifecycleExtensions = "2.2.0-rc01"
 
     // Testing
     const val junit = "4.12"
     const val googleTruth = "1.0"
-    const val mockWebServer = "4.1.0"
+    const val mockWebServer = "4.2.2"
 
     // Instrumentation only
     const val androidJUnit = "1.1.0"
-    const val androidCoreTesting = "2.0.1"
+    const val androidCoreTesting = "2.1.0"
     const val espresso = "3.2.0-beta01"
-    const val jacoco = "0.8.4"
+    const val jacoco = "0.8.5"
 
     // Logging and error handling
     const val timber = "4.7.1"
@@ -46,14 +46,14 @@ object Versions {
     const val leakCanary = "2.0-beta-3"
 
     // Dependency injection
-    const val dagger = "2.24"
+    const val dagger = "2.25.2"
 
     // Network
     const val retrofit = "2.6.2"
-    const val okHttp = "4.2.1"
+    const val okHttp = "4.2.2"
 
     // Rx
-    const val rxjava = "2.2.13"
+    const val rxjava = "2.2.14"
     const val rxAndroid = "2.1.1"
 
     // Image loading
