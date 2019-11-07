@@ -139,7 +139,7 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
             handleErrors(throwable)
         }
 
-        // we want the coroutine to be bounded to the ViewModel's lifecycle
+        // we want the coroutine to be bounded to the ViewModel's lifecycle (which is bound to the main thread)
         viewModelScope.launch(exceptionHandler) {
             // But the request should go to the background. However, Retrofit has its custom dispatcher, so we're good
             val users = getUsersFromApiThroughCoroutine(coroutineScope = this)
@@ -158,7 +158,7 @@ class RxJavaToCoroutinesViewModel @Inject constructor(
         return getUsersFromApi(NoParameters()) // List<User>
             .take(USER_LIMIT.toInt()) // Github API has a hourly call limit :D and 5 are enough for what we're doing
             .map { coroutineScope.async { getUserDetailsFromApi(it.username) } } // Yay concurrency!
-            .map { it.await() } // Wait for them to finish... These two last maps are pretty much a flatMap
+            .map { it.await() } // Wait for the async calls to finish... These two last maps are pretty much a flatMap
     }
 
     private fun handleErrors(error: Throwable?) {

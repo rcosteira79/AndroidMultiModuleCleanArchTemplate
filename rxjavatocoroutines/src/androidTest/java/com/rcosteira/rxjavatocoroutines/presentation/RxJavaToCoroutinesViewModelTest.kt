@@ -1,6 +1,5 @@
 package com.rcosteira.rxjavatocoroutines.presentation
 
-import RxImmediateSchedulerRule
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
@@ -12,21 +11,15 @@ import com.rcosteira.core.data.api.MockWebServerSetup
 import com.rcosteira.core.data.cache.Cache
 import com.rcosteira.core.data.cache.GithubDatabase
 import com.rcosteira.core.data.cache.RoomCache
-import com.rcosteira.core.data.entities.GithubDetailedUser
 import com.rcosteira.core.data.mappers.DetailedUserMapper
 import com.rcosteira.core.data.mappers.UserMapper
-import com.rcosteira.core.domain.*
-import com.rcosteira.core.domain.entities.DetailedUser
 import com.rcosteira.rxjavatocoroutines.domain.usecases.*
-import com.rcosteira.rxjavatocoroutines.presentation.entities.DisplayedDetailedUser
 import com.rcosteira.rxjavatocoroutines.presentation.mappers.DisplayedDetailedUserMapper
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.TestObserver
-import io.reactivex.subscribers.TestSubscriber
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withTimeoutOrNull
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -46,8 +39,8 @@ class RxJavaToCoroutinesViewModelTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @get:Rule
-    val rxImmediateSchedulerRule = RxImmediateSchedulerRule()
+//    @get:Rule
+//    val rxImmediateSchedulerRule = RxImmediateSchedulerRule()
 
     @ExperimentalCoroutinesApi
     @get:Rule
@@ -93,63 +86,63 @@ class RxJavaToCoroutinesViewModelTest {
         webServer.shutdown()
     }
 
-    @Test
-    fun getUsersFromApiAsSingle_successful_returnsASingleListOfUsers() {
-        val expectedNumberOfUsers = 2
-        val expectedFirstUserLocation = "San Francisco"
-
-        val testObserver: TestObserver<List<DetailedUser>> = viewModel.getUsersFromApiAsSingle().test()
-
-        testObserver.assertComplete()
-        testObserver.assertNoErrors()
-
-        val users: List<DetailedUser> = testObserver.values().first() // List<List<DetailedUser>>
-        assertThat(users.count()).isEqualTo(expectedNumberOfUsers)
-        assertThat(users.first().location.value).isEqualTo(expectedFirstUserLocation)
-    }
-
-    @ExperimentalCoroutinesApi
-    @Test
-    fun updateCacheWithRx_successful() {
-        val expectedNumberOfUsers = 2
-        val expectedSecondUserBlog = "http://chriswanstrath.com/"
-
-        viewModel.updateCacheWithRx()
-
-        val testSubscriber: TestSubscriber<List<GithubDetailedUser>> = database.usersDao().rxGetAllUsers().test()
-        val users: List<GithubDetailedUser> = testSubscriber.values().first() // List<List<GithubDetailedUser>>
-
-        assertThat(users.count()).isEqualTo(expectedNumberOfUsers)
-        assertThat(users.last().blog).isEqualTo(expectedSecondUserBlog)
-    }
-
-    @Test
-    fun setUserViewStateFromCacheWithRx_successful() {
-        viewModel.updateCacheWithRx()
-
-        viewModel.setUserViewStateFromCacheWithRx()
-
-        val users = listOf(
-            DisplayedDetailedUser(
-                Id(1),
-                Username("mojombo"),
-                Name("Tom Preston-Werner"),
-                Blog("http://tom.preston-werner.com"),
-                Location("San Francisco"),
-                Avatar("https://avatars0.githubusercontent.com/u/1?v=4")
-            ),
-            DisplayedDetailedUser(
-                Id(2),
-                Username("defunkt"),
-                Name("Chris Wanstrath"),
-                Blog("http://chriswanstrath.com/"),
-                Location("N/A"),
-                Avatar("https://avatars0.githubusercontent.com/u/2?v=4")
-            )
-        )
-
-        assertThat(viewModel.viewState.value).isEqualTo(RxJavaToCoroutinesViewState(detailedUsers = users))
-    }
+//    @Test
+//    fun getUsersFromApiAsSingle_successful_returnsASingleListOfUsers() {
+//        val expectedNumberOfUsers = 2
+//        val expectedFirstUserLocation = "San Francisco"
+//
+//        val testObserver: TestObserver<List<DetailedUser>> = viewModel.getUsersFromApiAsSingle().test()
+//
+//        testObserver.assertComplete()
+//        testObserver.assertNoErrors()
+//
+//        val users: List<DetailedUser> = testObserver.values().first() // List<List<DetailedUser>>
+//        assertThat(users.count()).isEqualTo(expectedNumberOfUsers)
+//        assertThat(users.first().location.value).isEqualTo(expectedFirstUserLocation)
+//    }
+//
+//    @ExperimentalCoroutinesApi
+//    @Test
+//    fun updateCacheWithRx_successful() {
+//        val expectedNumberOfUsers = 2
+//        val expectedSecondUserBlog = "http://chriswanstrath.com/"
+//
+//        viewModel.updateCacheWithRx()
+//
+//        val testSubscriber: TestSubscriber<List<GithubDetailedUser>> = database.usersDao().rxGetAllUsers().test()
+//        val users: List<GithubDetailedUser> = testSubscriber.values().first() // List<List<GithubDetailedUser>>
+//
+//        assertThat(users.count()).isEqualTo(expectedNumberOfUsers)
+//        assertThat(users.last().blog).isEqualTo(expectedSecondUserBlog)
+//    }
+//
+//    @Test
+//    fun setUserViewStateFromCacheWithRx_successful() {
+//        viewModel.updateCacheWithRx()
+//
+//        viewModel.setUserViewStateFromCacheWithRx()
+//
+//        val users = listOf(
+//            DisplayedDetailedUser(
+//                Id(1),
+//                Username("mojombo"),
+//                Name("Tom Preston-Werner"),
+//                Blog("http://tom.preston-werner.com"),
+//                Location("San Francisco"),
+//                Avatar("https://avatars0.githubusercontent.com/u/1?v=4")
+//            ),
+//            DisplayedDetailedUser(
+//                Id(2),
+//                Username("defunkt"),
+//                Name("Chris Wanstrath"),
+//                Blog("http://chriswanstrath.com/"),
+//                Location("N/A"),
+//                Avatar("https://avatars0.githubusercontent.com/u/2?v=4")
+//            )
+//        )
+//
+//        assertThat(viewModel.viewState.value).isEqualTo(RxJavaToCoroutinesViewState(detailedUsers = users))
+//    }
 
     //****************************** coroutines **********************************/
     @ExperimentalCoroutinesApi
@@ -172,11 +165,13 @@ class RxJavaToCoroutinesViewModelTest {
 
         viewModel.updateCacheWithCoroutines()
 
-        database.usersDao().getAllUsers()
-            .flowOn(mainCoroutineRule.testDispatcher)
-            .collect { users ->
-                assertThat(users.count()).isEqualTo(expectedNumberOfUsers)
-                assertThat(users.last().blog).isEqualTo(expectedSecondUserBlog)
-            }
+        // it's an infinite stream, and Flow does not seem to have specific test utilities for these cases yet
+        withTimeoutOrNull(2000) {
+            database.usersDao().getAllUsers()
+                .collect { users ->
+                    assertThat(users.count()).isEqualTo(expectedNumberOfUsers)
+                    assertThat(users.last().blog).isEqualTo(expectedSecondUserBlog)
+                }
+        }
     }
 }
